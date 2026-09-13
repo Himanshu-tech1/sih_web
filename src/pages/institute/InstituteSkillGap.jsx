@@ -8,6 +8,20 @@ import './InstituteSkillGap.css';
 
 const INITIAL_GAP_DATA = [
   {
+    id: 0,
+    skill: 'AI Predictive Maintenance & Industrial IoT (Industry 4.0)',
+    sector: 'Automation & Industry 4.0',
+    trade: 'Electrician',
+    program: 'Diploma',
+    demand: 100,
+    coverage: 0,
+    gap: 100,
+    status: 'Critical Gap',
+    action: 'Add Skill Module',
+    icon: 'sparkles',
+    isNew: true
+  },
+  {
     id: 1,
     skill: 'PLC Programming',
     sector: 'Electrical & Electronics',
@@ -263,6 +277,7 @@ const InstituteSkillGap = () => {
           <div className="select-wrapper">
             <select value={selectedSector} onChange={(e) => setSelectedSector(e.target.value)}>
               <option value="All">All Sectors</option>
+              <option value="Automation & Industry 4.0">Automation & Industry 4.0</option>
               <option value="Manufacturing">Manufacturing</option>
               <option value="Automotive">Automotive</option>
               <option value="Electrical & Electronics">Electrical & Electronics</option>
@@ -327,12 +342,21 @@ const InstituteSkillGap = () => {
                   {filteredData.map((item) => (
                     <tr key={item.id}>
                       <td className="skill-cell">
+                        {item.icon === 'sparkles' && <Sparkles size={16} className="icon-blue" style={{ color: '#7c3aed', backgroundColor: '#f5f3ff' }} />}
                         {item.icon === 'user' && <User size={16} className="icon-blue" />}
                         {item.icon === 'zap' && <Zap size={16} className="icon-blue" />}
                         {item.icon === 'settings' && <Settings size={16} className="icon-blue" />}
                         {item.icon === 'car' && <Car size={16} className="icon-blue" />}
                         {item.icon === 'alert' && <AlertTriangle size={16} className="icon-blue" />}
-                        <span style={{ fontWeight: '600' }}>{item.skill}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
+                          <span style={{ fontWeight: '600' }}>{item.skill}</span>
+                          {item.isNew && (
+                            <>
+                              <span className="new-skill-badge">NEW</span>
+                              <span className="untaught-badge">Untaught (0% Coverage)</span>
+                            </>
+                          )}
+                        </div>
                       </td>
                       <td>
                         <span className="trade-badge">{item.trade}</span>
