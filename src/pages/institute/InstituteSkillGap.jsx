@@ -1,29 +1,213 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Scale, ChevronDown, AlertTriangle, RefreshCw, FileText, Download,
-  CheckCircle2, AlertCircle, ArrowUpRight, ArrowDownRight, User, Settings, Zap, Car, BookOpen, Clock, Hexagon, Crosshair
+  CheckCircle2, AlertCircle, ArrowUpRight, ArrowDownRight, User, Settings, Zap, Car, BookOpen, Clock, Hexagon, Crosshair,
+  Search, Check, Sparkles, Filter
 } from 'lucide-react';
 import './InstituteSkillGap.css';
 
+const INITIAL_GAP_DATA = [
+  {
+    id: 1,
+    skill: 'PLC Programming',
+    sector: 'Electrical & Electronics',
+    trade: 'Electrician',
+    program: 'Diploma',
+    demand: 90,
+    coverage: 45,
+    gap: 45,
+    status: 'Critical Gap',
+    action: 'Add Skill Module',
+    icon: 'user'
+  },
+  {
+    id: 2,
+    skill: 'Robotics & Industrial Automation',
+    sector: 'Manufacturing',
+    trade: 'Machinist',
+    program: 'Diploma',
+    demand: 80,
+    coverage: 20,
+    gap: 60,
+    status: 'Critical Gap',
+    action: 'Upgrade Lab',
+    icon: 'zap'
+  },
+  {
+    id: 3,
+    skill: 'CNC Programming & Operation',
+    sector: 'Manufacturing',
+    trade: 'Fitter',
+    program: 'ITI',
+    demand: 90,
+    coverage: 75,
+    gap: 15,
+    status: 'Partial',
+    action: 'Increase Practical Training',
+    icon: 'settings'
+  },
+  {
+    id: 4,
+    skill: 'EV Technology & Battery Pack Assembly',
+    sector: 'Automotive',
+    trade: 'Electrician',
+    program: 'Diploma',
+    demand: 85,
+    coverage: 20,
+    gap: 65,
+    status: 'Critical Gap',
+    action: 'Collaborate With Industry',
+    icon: 'car'
+  },
+  {
+    id: 5,
+    skill: 'Advanced Welding (TIG/MIG)',
+    sector: 'Manufacturing',
+    trade: 'Welder',
+    program: 'ITI',
+    demand: 70,
+    coverage: 60,
+    gap: 10,
+    status: 'Partial',
+    action: 'Update Curriculum',
+    icon: 'alert'
+  },
+  {
+    id: 6,
+    skill: 'Electrical Systems & Substation Wiring',
+    sector: 'Electrical & Electronics',
+    trade: 'Electrician',
+    program: 'ITI',
+    demand: 75,
+    coverage: 70,
+    gap: 5,
+    status: 'Aligned',
+    action: 'Maintain',
+    icon: 'zap'
+  },
+  {
+    id: 7,
+    skill: 'AutoCAD & 3D Mechanical Modeling',
+    sector: 'Manufacturing',
+    trade: 'Fitter',
+    program: 'Diploma',
+    demand: 82,
+    coverage: 65,
+    gap: 17,
+    status: 'Partial',
+    action: 'Increase Practical Training',
+    icon: 'settings'
+  },
+  {
+    id: 8,
+    skill: 'Solar & Renewable Energy Systems',
+    sector: 'Renewable Energy',
+    trade: 'Electrician',
+    program: 'ITI',
+    demand: 78,
+    coverage: 35,
+    gap: 43,
+    status: 'Critical Gap',
+    action: 'Add Skill Module',
+    icon: 'zap'
+  }
+];
+
+const ACTION_OPTIONS = [
+  'Add Skill Module',
+  'Upgrade Lab',
+  'Increase Practical Training',
+  'Collaborate With Industry',
+  'Update Curriculum',
+  'Faculty Training (ToT)',
+  'Dual Training / Apprenticeship',
+  'Maintain'
+];
+
 const InstituteSkillGap = () => {
+  const [skillsData, setSkillsData] = useState(INITIAL_GAP_DATA);
+  const [selectedTrade, setSelectedTrade] = useState('All');
+  const [selectedProgram, setSelectedProgram] = useState('All');
+  const [selectedSector, setSelectedSector] = useState('All');
+  const [selectedDemandLevel, setSelectedDemandLevel] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
+
+  const handleActionChange = (id, newAction) => {
+    setSkillsData(prev => prev.map(item => {
+      if (item.id === id) {
+        return { ...item, action: newAction };
+      }
+      return item;
+    }));
+
+    const skillItem = skillsData.find(s => s.id === id);
+    showToast(`✓ Recommended action for "${skillItem?.skill || 'Skill'}" set to "${newAction}"`);
+  };
+
+  const resetFilters = () => {
+    setSelectedTrade('All');
+    setSelectedProgram('All');
+    setSelectedSector('All');
+    setSelectedDemandLevel('All');
+    setSearchQuery('');
+  };
+
+  const handleExport = () => {
+    showToast('📥 Skills Gap Analysis report downloaded successfully (PDF/Excel)!');
+  };
+
+  const filteredData = skillsData.filter(item => {
+    const matchesSearch = !searchQuery || 
+      item.skill.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.trade.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.sector.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesTrade = selectedTrade === 'All' || item.trade.toLowerCase() === selectedTrade.toLowerCase();
+    const matchesProgram = selectedProgram === 'All' || item.program.toLowerCase() === selectedProgram.toLowerCase();
+    const matchesSector = selectedSector === 'All' || item.sector.toLowerCase() === selectedSector.toLowerCase();
+    const matchesDemandLevel = selectedDemandLevel === 'All' || 
+      (selectedDemandLevel === 'Critical Gap' && item.gap >= 40) ||
+      (selectedDemandLevel === 'Partial' && item.gap > 5 && item.gap < 40) ||
+      (selectedDemandLevel === 'Aligned' && item.gap <= 5);
+
+    return matchesSearch && matchesTrade && matchesProgram && matchesSector && matchesDemandLevel;
+  });
+
   return (
     <div className="institute-skill-gap">
+      {/* Toast Alert */}
+      {toastMessage && (
+        <div className="toast-notification-banner">
+          <CheckCircle2 size={18} />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {/* Header */}
       <div className="page-header">
         <div className="header-title">
           <div className="title-icon">
             <Scale size={24} />
           </div>
           <div>
-            <h1>Skill Gap & Alignment</h1>
-            <p>Compare what industries require with what your institute currently teaches.</p>
+            <h1>Skill Gap & Alignment Analysis</h1>
+            <p>Compare Maharashtra industrial skill demands with your institute's course coverage and take action.</p>
           </div>
         </div>
         <div className="header-actions">
           <div className="last-updated">
             <span className="icon">⏱</span>
             <div>
-              <span className="label">Last Updated</span>
-              <span className="time">26 Jun 2025, 10:45 AM</span>
+              <span className="label">Last Synced</span>
+              <span className="time">Live Data • Pune Industrial Cluster</span>
             </div>
           </div>
           <button className="year-selector">
@@ -34,363 +218,189 @@ const InstituteSkillGap = () => {
         </div>
       </div>
 
-
+      {/* Filters Bar */}
       <div className="filters-bar">
+        <div className="filter-group">
+          <label>Search Skill</label>
+          <div className="search-input-wrap">
+            <input 
+              type="text" 
+              placeholder="Search skill, trade..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+
         <div className="filter-group">
           <label>Trade</label>
           <div className="select-wrapper">
-            <select><option>All Trades</option></select>
+            <select value={selectedTrade} onChange={(e) => setSelectedTrade(e.target.value)}>
+              <option value="All">All Trades</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Fitter">Fitter</option>
+              <option value="Machinist">Machinist</option>
+              <option value="Welder">Welder</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
+
         <div className="filter-group">
           <label>Program</label>
           <div className="select-wrapper">
-            <select><option>All Programs</option></select>
+            <select value={selectedProgram} onChange={(e) => setSelectedProgram(e.target.value)}>
+              <option value="All">All Programs</option>
+              <option value="ITI">ITI</option>
+              <option value="Diploma">Diploma</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
+
         <div className="filter-group">
           <label>Sector</label>
           <div className="select-wrapper">
-            <select><option>All Sectors</option></select>
+            <select value={selectedSector} onChange={(e) => setSelectedSector(e.target.value)}>
+              <option value="All">All Sectors</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Automotive">Automotive</option>
+              <option value="Electrical & Electronics">Electrical & Electronics</option>
+              <option value="Renewable Energy">Renewable Energy</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
+
         <div className="filter-group">
-          <label>Skill</label>
+          <label>Demand & Gap Level</label>
           <div className="select-wrapper">
-            <select><option>All Skills</option></select>
+            <select value={selectedDemandLevel} onChange={(e) => setSelectedDemandLevel(e.target.value)}>
+              <option value="All">All Levels</option>
+              <option value="Critical Gap">Critical Gap (&ge; 40%)</option>
+              <option value="Partial">Partial Gap (10% - 39%)</option>
+              <option value="Aligned">Aligned (&le; 10%)</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
-        <div className="filter-group">
-          <label>District</label>
-          <div className="select-wrapper">
-            <select><option>Pune</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <div className="filter-group">
-          <label>Demand Level</label>
-          <div className="select-wrapper">
-            <select><option>All Levels</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <button className="reset-btn">
+
+        <button className="reset-btn" onClick={resetFilters}>
           <RefreshCw size={14} /> Reset Filters
         </button>
       </div>
 
-      <div className="main-content-area">
-        <div className="left-panel">
-          
-
+      {/* Main Content Area: Full Width Skills Gap Analysis Table */}
+      <div className="main-content-area full-width-layout">
+        <div className="left-panel full-width-panel">
           <div className="table-section-card">
             <div className="card-header">
               <div className="card-title">
                 <div className="icon-wrapper blue"><FileText size={18} /></div>
                 <div>
                   <h3>Skills Gap Analysis</h3>
-                  <p className="card-subtitle">Detailed comparison of industry demand vs institute coverage.</p>
+                  <p className="card-subtitle">Detailed comparison of industry demand vs institute coverage with recommended actions.</p>
                 </div>
               </div>
-              <button className="primary-btn small">
-                <Download size={14} /> Export Report
-              </button>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                <span className="results-count-tag">{filteredData.length} Skills Analyzed</span>
+                <button className="primary-btn small" onClick={handleExport}>
+                  <Download size={14} /> Export Report
+                </button>
+              </div>
             </div>
 
-            <table className="analysis-table">
-              <thead>
-                <tr>
-                  <th>Skill</th>
-                  <th>Industry Demand <ChevronDown size={12} className="sort-icon"/></th>
-                  <th>Institute Coverage <ChevronDown size={12} className="sort-icon"/></th>
-                  <th>Gap <ChevronDown size={12} className="sort-icon"/></th>
-                  <th>Status <ChevronDown size={12} className="sort-icon"/></th>
-                  <th>Recommended Action <ChevronDown size={12} className="sort-icon"/></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="skill-cell"><User size={16} className="icon-blue" /> PLC Programming</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>90%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '90%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>45%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '45%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>45%</td>
-                  <td><span className="status-pill critical">Critical Gap</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Add Skill Module</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="skill-cell"><Zap size={16} className="icon-blue" /> Robotics</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>80%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '80%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>20%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '20%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>60%</td>
-                  <td><span className="status-pill critical">Critical Gap</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Upgrade Lab</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="skill-cell"><Settings size={16} className="icon-blue" /> CNC Programming</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>90%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '90%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>75%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '75%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>15%</td>
-                  <td><span className="status-pill partial">Partial</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Increase Practical Training</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="skill-cell"><Car size={16} className="icon-blue" /> EV Technology</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>85%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '85%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>20%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '20%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>65%</td>
-                  <td><span className="status-pill critical">Critical Gap</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Collaborate With Industry</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="skill-cell"><AlertTriangle size={16} className="icon-blue" /> Welding</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>70%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '70%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>60%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '60%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>10%</td>
-                  <td><span className="status-pill partial">Partial</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Update Curriculum</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="skill-cell"><Zap size={16} className="icon-blue" /> Electrical Systems</td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>75%</span>
-                      <div className="progress-bar"><div className="progress blue" style={{width: '75%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="progress-cell">
-                      <span>70%</span>
-                      <div className="progress-bar"><div className="progress light-blue" style={{width: '70%'}}></div></div>
-                    </div>
-                  </td>
-                  <td>5%</td>
-                  <td><span className="status-pill aligned">Aligned</span></td>
-                  <td>
-                    <div className="select-action">
-                      <select><option>Maintain</option></select>
-                      <ChevronDown size={14} />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="table-responsive">
+              <table className="analysis-table">
+                <thead>
+                  <tr>
+                    <th>Skill Competency</th>
+                    <th>Related Trade / Sector</th>
+                    <th>Industry Demand</th>
+                    <th>Institute Coverage</th>
+                    <th>Gap %</th>
+                    <th>Status</th>
+                    <th>Recommended Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((item) => (
+                    <tr key={item.id}>
+                      <td className="skill-cell">
+                        {item.icon === 'user' && <User size={16} className="icon-blue" />}
+                        {item.icon === 'zap' && <Zap size={16} className="icon-blue" />}
+                        {item.icon === 'settings' && <Settings size={16} className="icon-blue" />}
+                        {item.icon === 'car' && <Car size={16} className="icon-blue" />}
+                        {item.icon === 'alert' && <AlertTriangle size={16} className="icon-blue" />}
+                        <span style={{ fontWeight: '600' }}>{item.skill}</span>
+                      </td>
+                      <td>
+                        <span className="trade-badge">{item.trade}</span>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{item.sector}</div>
+                      </td>
+                      <td>
+                        <div className="progress-cell">
+                          <span className="pct-num">{item.demand}%</span>
+                          <div className="progress-bar">
+                            <div className="progress blue" style={{ width: `${item.demand}%` }}></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="progress-cell">
+                          <span className="pct-num">{item.coverage}%</span>
+                          <div className="progress-bar">
+                            <div className="progress light-blue" style={{ width: `${item.coverage}%` }}></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <strong style={{ color: item.gap >= 40 ? '#ef4444' : item.gap >= 15 ? '#f59e0b' : '#16a34a' }}>
+                          {item.gap}%
+                        </strong>
+                      </td>
+                      <td>
+                        <span className={`status-pill ${item.status === 'Critical Gap' ? 'critical' : item.status.toLowerCase()}`}>
+                          {item.status}
+                        </span>
+                      </td>
+                      <td>
+                        {/* Working Recommended Action Dropdown */}
+                        <div className="select-action">
+                          <select 
+                            value={item.action} 
+                            onChange={(e) => handleActionChange(item.id, e.target.value)}
+                          >
+                            {ACTION_OPTIONS.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
+                          </select>
+                          <ChevronDown size={14} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+
+                  {filteredData.length === 0 && (
+                    <tr>
+                      <td colSpan="7" style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
+                        No skill gaps matching your filters. Try clicking "Reset Filters".
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
             
             <div className="table-footer">
-              <span className="showing-text">Showing 6 of 24 skills</span>
+              <span className="showing-text">Showing {filteredData.length} of {skillsData.length} trade skills</span>
               <div className="pagination">
-                <button className="page-btn"><ChevronDown size={16} style={{transform: 'rotate(90deg)'}} /></button>
                 <button className="page-btn active">1</button>
-                <button className="page-btn">2</button>
-                <button className="page-btn">3</button>
-                <button className="page-btn">4</button>
-                <button className="page-btn"><ChevronDown size={16} style={{transform: 'rotate(-90deg)'}} /></button>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="right-panel">
-          
-          <div className="overview-card">
-            <h3>Alignment Overview</h3>
-            <div className="donut-and-legend">
-              <div className="big-donut">
-                <svg viewBox="0 0 36 36" className="circular-chart">
-                  <path className="circle-segment green" strokeDasharray="42, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                  <path className="circle-segment orange" strokeDasharray="27, 100" strokeDashoffset="-42" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                  <path className="circle-segment red" strokeDasharray="18, 100" strokeDashoffset="-69" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                  <path className="circle-segment gray" strokeDasharray="13, 100" strokeDashoffset="-87" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                  <text x="18" y="16" className="percentage">68%</text>
-                  <text x="18" y="22" className="sub-text">Overall</text>
-                  <text x="18" y="26" className="sub-text">Alignment</text>
-                </svg>
-              </div>
-              <div className="legend-list">
-                <div className="legend-row">
-                  <div className="legend-label"><span className="dot green"></span> Fully Aligned</div>
-                  <div className="legend-value">28 <span className="dim">(42%)</span></div>
-                </div>
-                <div className="legend-row">
-                  <div className="legend-label"><span className="dot orange"></span> Partial Alignment</div>
-                  <div className="legend-value">18 <span className="dim">(27%)</span></div>
-                </div>
-                <div className="legend-row">
-                  <div className="legend-label"><span className="dot red"></span> Critical Gap</div>
-                  <div className="legend-value">12 <span className="dim">(18%)</span></div>
-                </div>
-                <div className="legend-row">
-                  <div className="legend-label"><span className="dot gray"></span> Not Covered</div>
-                  <div className="legend-value">8 <span className="dim">(13%)</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="top-gaps-card">
-            <div className="card-header">
-              <div className="card-title">
-                <AlertTriangle size={16} color="#ef4444" />
-                <h3>Top Skill Gaps</h3>
-              </div>
-              <a href="#" className="view-all">View All</a>
-            </div>
-            <div className="gap-list">
-              <div className="gap-item">
-                <span className="rank">1</span>
-                <span className="gap-name">PLC Programming</span>
-                <span className="gap-value red">45% gap</span>
-              </div>
-              <div className="gap-item">
-                <span className="rank">2</span>
-                <span className="gap-name">Robotics</span>
-                <span className="gap-value red">60% gap</span>
-              </div>
-              <div className="gap-item">
-                <span className="rank">3</span>
-                <span className="gap-name">EV Technology</span>
-                <span className="gap-value red">65% gap</span>
-              </div>
-              <div className="gap-item">
-                <span className="rank">4</span>
-                <span className="gap-name">Advanced Manufacturing</span>
-                <span className="gap-value red">50% gap</span>
-              </div>
-              <div className="gap-item">
-                <span className="rank">5</span>
-                <span className="gap-name">CNC Programming</span>
-                <span className="gap-value red">15% gap</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="drilldown-card">
-            <h3>Drilldown: Institute → Program → Skill → Industry</h3>
-            
-            <div className="drilldown-path">
-              <div className="path-item">
-                <div className="path-icon"><BookOpen size={16} /></div>
-                <div className="path-details">
-                  <span className="path-label">Institute</span>
-                  <span className="path-value">Shree Ganesh ITI</span>
-                  <span className="path-sub">Pune, Maharashtra</span>
-                </div>
-              </div>
-              <div className="path-connector"><ArrowDownRight size={16} /></div>
-              
-              <div className="path-item">
-                <div className="path-icon"><Clock size={16} /></div>
-                <div className="path-details">
-                  <span className="path-label">Program</span>
-                  <span className="path-value">Electrical Engineering (Diploma)</span>
-                  <span className="path-sub">3 Years</span>
-                </div>
-              </div>
-              <div className="path-connector"><ArrowDownRight size={16} /></div>
-
-              <div className="path-item">
-                <div className="path-icon"><Zap size={16} /></div>
-                <div className="path-details">
-                  <span className="path-label">Skill</span>
-                  <span className="path-value">PLC Programming</span>
-                  <span className="path-sub">Technical</span>
-                </div>
-              </div>
-              <div className="path-connector"><ArrowDownRight size={16} /></div>
-
-              <div className="path-item">
-                <div className="path-icon"><Hexagon size={16} /></div>
-                <div className="path-details">
-                  <span className="path-label">Industry Requirement</span>
-                  <span className="path-value">Automation Industry</span>
-                  <span className="path-sub">High demand + 90%</span>
-                </div>
-              </div>
-            </div>
-
-            <button className="primary-btn full-width view-full-btn">
-              View Full Requirement Details
-            </button>
-          </div>
-
         </div>
       </div>
     </div>
