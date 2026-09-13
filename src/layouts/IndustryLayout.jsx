@@ -12,8 +12,7 @@ const IndustryLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const navItems = [
-    { name: 'Overview', path: '/employer/dashboard', icon: Home, end: true },
-    { name: 'Company Profile', path: '/employer/dashboard/profile', icon: Building2 },
+    { name: 'Company Profile', path: '/employer/dashboard', icon: Building2 },
     { name: 'Job Openings', path: '/employer/dashboard/jobs', icon: Briefcase },
     { name: 'Required Skills', path: '/employer/dashboard/skills', icon: Target },
     { name: 'Skill Gap Feedback', path: '/employer/dashboard/gap-feedback', icon: MessageSquare },
@@ -36,9 +35,6 @@ const IndustryLayout = () => {
 
         <nav className="sidebar-nav">
           <NavLink to="/employer/dashboard" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Home size={18} /> Dashboard
-          </NavLink>
-          <NavLink to="/employer/dashboard/profile" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Building2 size={18} /> Company Profile
           </NavLink>
           <NavLink to="/employer/dashboard/jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
