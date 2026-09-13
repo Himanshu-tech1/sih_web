@@ -265,7 +265,7 @@ const StudentAssessment = () => {
             </div>
           </div>
         </div>
-      
+      </div>
         </>
       )}
 
@@ -610,10 +610,9 @@ const StudentAssessment = () => {
           </div>
 
         </div>
-      
+      </div>
         </>
       )}
-</div>
     </div>
   );
 };
