@@ -24,7 +24,6 @@ import InstituteLayout from './layouts/InstituteLayout';
 
 import InstituteProfile from './pages/institute/InstituteProfile';
 import InstituteCourses from './pages/institute/InstituteCourses';
-import InstituteSkillsTaught from './pages/institute/InstituteSkillsTaught';
 import InstituteSkillGap from './pages/institute/InstituteSkillGap';
 import InstituteCollaboration from './pages/institute/InstituteCollaboration';
 import InstituteIndustryJobs from './pages/institute/InstituteIndustryJobs';
@@ -43,7 +42,6 @@ function App() {
         <Route path="/institute/dashboard" element={<InstituteLayout />}>
           <Route index element={<InstituteProfile />} />
           <Route path="courses" element={<InstituteCourses />} />
-          <Route path="skills-taught" element={<InstituteSkillsTaught />} />
           <Route path="industry-jobs" element={<InstituteIndustryJobs />} />
           <Route path="skill-gap" element={<InstituteSkillGap />} />
           <Route path="collaboration" element={<InstituteCollaboration />} />

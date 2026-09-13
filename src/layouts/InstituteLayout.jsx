@@ -31,9 +31,6 @@ const InstituteLayout = () => {
           <NavLink to="/institute/dashboard/courses" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <BookOpen size={18} /> Courses & Curriculum
           </NavLink>
-          <NavLink to="/institute/dashboard/skills-taught" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Settings size={18} /> Skills Taught
-          </NavLink>
           <NavLink to="/institute/dashboard/skill-gap" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Target size={18} /> Skill Gap & Alignment
           </NavLink>
