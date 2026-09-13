@@ -1,0 +1,168 @@
+.gap-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gap-kpi-card {
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.gap-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+.gap-kpi-card.orange-bg { background-color: #fff7ed; border: 1px solid #ffedd5; }
+.gap-kpi-card.orange-bg::before { background-color: #f97316; }
+.gap-kpi-card.orange-bg .kpi-icon { color: #f97316; }
+.gap-kpi-card.orange-bg h3 { color: #c2410c; }
+.gap-kpi-card.orange-bg .kpi-value { color: #9a3412; }
+
+.gap-kpi-card.red-bg { background-color: #fef2f2; border: 1px solid #fee2e2; }
+.gap-kpi-card.red-bg::before { background-color: #ef4444; }
+.gap-kpi-card.red-bg .kpi-icon { color: #ef4444; }
+.gap-kpi-card.red-bg h3 { color: #b91c1c; }
+.gap-kpi-card.red-bg .kpi-value { color: #7f1d1d; }
+
+.gap-kpi-card.yellow-bg { background-color: #fefce8; border: 1px solid #fef08a; }
+.gap-kpi-card.yellow-bg::before { background-color: #eab308; }
+.gap-kpi-card.yellow-bg .kpi-icon { color: #eab308; }
+.gap-kpi-card.yellow-bg h3 { color: #a16207; }
+.gap-kpi-card.yellow-bg .kpi-value { color: #713f12; }
+
+.gap-kpi-card.green-bg { background-color: #f0fdf4; border: 1px solid #dcfce7; }
+.gap-kpi-card.green-bg::before { background-color: #22c55e; }
+.gap-kpi-card.green-bg .kpi-icon { color: #22c55e; }
+.gap-kpi-card.green-bg h3 { color: #15803d; }
+.gap-kpi-card.green-bg .kpi-value { color: #14532d; }
+
+.gap-kpi-card.blue-bg { background-color: #eff6ff; border: 1px solid #dbeafe; }
+.gap-kpi-card.blue-bg::before { background-color: #3b82f6; }
+.gap-kpi-card.blue-bg .kpi-icon { color: #3b82f6; }
+.gap-kpi-card.blue-bg h3 { color: #1d4ed8; }
+.gap-kpi-card.blue-bg .kpi-value { color: #1e3a8a; }
+
+.gap-kpi-card .kpi-icon-header { margin-bottom: 0.5rem; }
+.gap-kpi-card h3 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; }
+.gap-kpi-card .kpi-value { font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+
+.gap-kpi-card .kpi-change {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+.gap-kpi-card .kpi-change span { font-weight: 600; }
+.gap-kpi-card .kpi-change.positive { color: #16a34a; }
+.gap-kpi-card .kpi-change.negative { color: #ef4444; }
+.gap-kpi-card .vs-text { font-weight: 500 !important; opacity: 0.8; color: inherit !important;}
+
+/* Charts Row */
+.gap-charts-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pie-card { flex: 4; }
+.bar-card { flex: 5; }
+
+.chart-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.chart-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+.chart-icon.blue { background-color: #eff6ff; color: #3b82f6; }
+
+.chart-header p {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  margin-left: 32px;
+}
+
+.chart-body { padding: 1.5rem; }
+.flex-row { display: flex; align-items: center; gap: 1.5rem; }
+
+.pie-container { flex: 1; position: relative; }
+.pie-legend-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.pie-legend-list .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #334155;
+}
+.pie-legend-list .val {
+  margin-left: auto;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pie-center-val { font-size: 1.5rem; font-weight: 700; fill: #0f172a; }
+.pie-center-text { font-size: 0.75rem; fill: #64748b; }
+
+.bar-container {
+  height: 250px;
+}
+
+/* Status Pills overrides */
+.status-pill.red-fill { background-color: #fef2f2; border: 1px solid #fecaca; color: #ef4444; }
+.status-pill.orange-fill { background-color: #fff7ed; border: 1px solid #fed7aa; color: #f97316; }
+.status-pill.green-outline { background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #16a34a; }
+
+/* Grid Forms */
+.form-grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.panel-icon-circle.blue {
+  width: 32px; height: 32px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
