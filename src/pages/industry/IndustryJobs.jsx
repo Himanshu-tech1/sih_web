@@ -148,7 +148,14 @@ const IndustryJobs = () => {
               </div>
               <div className="form-group">
                 <label>Department</label>
-                <select><option>Select Department</option></select>
+                <select>
+                  <option value="">Select Department</option>
+                  <option value="manufacturing">Manufacturing</option>
+                  <option value="maintenance">Maintenance</option>
+                  <option value="quality-control">Quality Control</option>
+                  <option value="engineering">Engineering</option>
+                  <option value="logistics">Logistics</option>
+                </select>
               </div>
               <div className="form-group">
                 <label>Number of Vacancies *</label>
@@ -156,11 +163,24 @@ const IndustryJobs = () => {
               </div>
               <div className="form-group">
                 <label>Job Location *</label>
-                <select><option>Select Location</option></select>
+                <select>
+                  <option value="">Select Location</option>
+                  <option value="pune">Pune</option>
+                  <option value="mumbai">Mumbai</option>
+                  <option value="chakan">Chakan</option>
+                  <option value="akurdi">Akurdi</option>
+                  <option value="nashik">Nashik</option>
+                </select>
               </div>
               <div className="form-group">
                 <label>Employment Type *</label>
-                <select><option>Full Time</option></select>
+                <select>
+                  <option value="">Select Type</option>
+                  <option value="full-time">Full Time</option>
+                  <option value="part-time">Part Time</option>
+                  <option value="contract">Contract</option>
+                  <option value="internship">Internship</option>
+                </select>
               </div>
               <div className="form-group">
                 <label>Hiring Timeline *</label>
@@ -199,14 +219,38 @@ const IndustryJobs = () => {
             </div>
             <div className="skills-row">
               <div style={{flex: 2}}><input type="text" placeholder="e.g. CNC Operating" /></div>
-              <div style={{flex: 1}}><select><option>Select</option></select></div>
-              <div style={{flex: 1}}><select><option>Mandatory</option></select></div>
+              <div style={{flex: 1}}>
+                <select>
+                  <option value="">Select</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="expert">Expert</option>
+                </select>
+              </div>
+              <div style={{flex: 1}}>
+                <select>
+                  <option value="mandatory">Mandatory</option>
+                  <option value="preferred">Preferred</option>
+                </select>
+              </div>
               <button className="del-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
             </div>
             <div className="skills-row">
               <div style={{flex: 2}}><input type="text" placeholder="e.g. Safety Standards" /></div>
-              <div style={{flex: 1}}><select><option>Select</option></select></div>
-              <div style={{flex: 1}}><select><option>Preferred</option></select></div>
+              <div style={{flex: 1}}>
+                <select>
+                  <option value="">Select</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="expert">Expert</option>
+                </select>
+              </div>
+              <div style={{flex: 1}}>
+                <select>
+                  <option value="mandatory">Mandatory</option>
+                  <option selected value="preferred">Preferred</option>
+                </select>
+              </div>
               <button className="del-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
             </div>
             <button className="add-skill-btn"><Plus size={14}/> Add Another Skill</button>
@@ -225,7 +269,14 @@ const IndustryJobs = () => {
               </div>
               <div className="form-group">
                 <label>Shift</label>
-                <select><option>Select Shift</option></select>
+                <select>
+                  <option value="">Select Shift</option>
+                  <option value="general">General Shift (9 AM - 5 PM)</option>
+                  <option value="first">1st Shift (6 AM - 2 PM)</option>
+                  <option value="second">2nd Shift (2 PM - 10 PM)</option>
+                  <option value="third">3rd Shift (10 PM - 6 AM)</option>
+                  <option value="rotational">Rotational Shifts</option>
+                </select>
               </div>
               <div className="form-group full-width">
                 <label>Job Description *</label>
