@@ -1,6 +1,5 @@
 import React from 'react';
 import { AlertTriangle, AlertCircle, CheckCircle, Users, Download, MoreHorizontal } from 'lucide-react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import './IndustrySkillGap.css';
 
 const GapKpiCard = ({ title, value, change, icon: Icon, colorClass, isNegative = false }) => (
@@ -30,22 +29,6 @@ const IndustrySkillGap = () => {
     { id: 6, skill: 'EV Diagnostics', role: 'EV Service Technician', req: 'Intermediate', cand: 'Basic', gap: 'High', sev: 'High', date: '30 Aug 2025' },
   ];
 
-  const pieData = [
-    { name: 'Critical Gaps', value: 8, color: '#ef4444' },
-    { name: 'High Gaps', value: 12, color: '#f97316' },
-    { name: 'Moderate Gaps', value: 6, color: '#eab308' },
-    { name: 'Low Gaps', value: 2, color: '#22c55e' }
-  ];
-
-  const barData = [
-    { name: 'Manufacturing', gaps: 9 },
-    { name: 'Automotive & EV', gaps: 6 },
-    { name: 'Electronics & Semiconductors', gaps: 4 },
-    { name: 'Engineering Services', gaps: 3 },
-    { name: 'Renewable Energy', gaps: 3 },
-    { name: 'Construction & Infrastructure', gaps: 2 },
-    { name: 'Others', gaps: 1 }
-  ];
 
   return (
     <div className="dashboard-page gap-page">
@@ -57,65 +40,6 @@ const IndustrySkillGap = () => {
         <button className="btn primary-btn">+ Report Skill Gap</button>
       </div>
 
-      <div className="gap-kpi-grid">
-        <GapKpiCard title="Reported Skill Gaps" value="28" change="+27%" icon={AlertTriangle} colorClass="orange-bg" isNegative={true} />
-        <GapKpiCard title="Critical Gaps" value="8" change="+33%" icon={AlertCircle} colorClass="red-bg" isNegative={true} />
-        <GapKpiCard title="Moderate Gaps" value="12" change="+20%" icon={AlertTriangle} colorClass="yellow-bg" />
-        <GapKpiCard title="Resolved Gaps" value="6" change="+50%" icon={CheckCircle} colorClass="green-bg" />
-        <GapKpiCard title="Skills Needing Training" value="21" change="+35%" icon={Users} colorClass="blue-bg" isNegative={true} />
-      </div>
-
-      <div className="gap-charts-row">
-        <div className="chart-card pie-card">
-          <div className="chart-header">
-            <h3><span className="chart-icon blue"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12V7H5a2 2 0 0 1 2-2h14v4"/></svg></span> Industry Skill Gap Overview</h3>
-            <p>Distribution of reported skill gaps by severity level.</p>
-          </div>
-          <div className="chart-body flex-row">
-            <div className="pie-container">
-              <ResponsiveContainer width="100%" height={180}>
-                <PieChart>
-                  <Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={2} dataKey="value">
-                    {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <text x="50%" y="45%" textAnchor="middle" dominantBaseline="middle" className="pie-center-val">28</text>
-                  <text x="50%" y="60%" textAnchor="middle" dominantBaseline="middle" className="pie-center-text">Total Gaps</text>
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="pie-legend-list">
-              <div className="legend-item"><span className="dot red"></span> Critical Gaps <span className="val">8</span></div>
-              <div className="legend-item"><span className="dot orange"></span> High Gaps <span className="val">12</span></div>
-              <div className="legend-item"><span className="dot yellow"></span> Moderate Gaps <span className="val">6</span></div>
-              <div className="legend-item"><span className="dot green"></span> Low Gaps <span className="val">2</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="chart-card bar-card">
-          <div className="chart-header">
-            <h3><span className="chart-icon blue"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span> Skill Gaps by Sector</h3>
-            <p>Top sectors with reported skill gaps.</p>
-          </div>
-          <div className="chart-body bar-container">
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart layout="vertical" data={barData} margin={{ top: 0, right: 30, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{fontSize: 11, fill: '#475569'}} width={180} />
-                <Bar dataKey="gaps" fill="#f87171" radius={[0, 4, 4, 0]} barSize={12}>
-                  {barData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={index === 0 ? '#ef4444' : '#f87171'} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-            {/* Adding labels inside bars for visual match (simplification for recharts) */}
-          </div>
-        </div>
-      </div>
 
       <div className="table-card">
         <div className="table-header-bar">

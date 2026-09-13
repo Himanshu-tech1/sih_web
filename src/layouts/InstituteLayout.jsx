@@ -23,9 +23,6 @@ const InstituteLayout = () => {
         <nav className="sidebar-nav">
           <div className="nav-group-title">Institute Dashboard</div>
           <NavLink to="/institute/dashboard" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Home size={18} /> Overview
-          </NavLink>
-          <NavLink to="/institute/dashboard/profile" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Building2 size={18} /> Institute Profile
           </NavLink>
           <NavLink to="/institute/dashboard/courses" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>

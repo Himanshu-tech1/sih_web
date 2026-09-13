@@ -48,13 +48,6 @@ const IndustryCollaboration = () => {
         </div>
       </div>
 
-      <div className="collab-kpi-grid">
-        <CollabKpiCard title="Partner Institutes" value="24" change="+33%" changeText="from last year" icon={Building2} colorClass="green-bg" />
-        <CollabKpiCard title="Active Collaborations" value="18" change="+50%" changeText="ongoing" icon={Handshake} colorClass="blue-bg" />
-        <CollabKpiCard title="Collaboration Requests" value="7" change="+40%" changeText="new requests" icon={FileText} colorClass="orange-bg" />
-        <CollabKpiCard title="Training Programs" value="12" change="+71%" changeText="this year" icon={GraduationCap} colorClass="purple-bg" />
-        <CollabKpiCard title="Institutes Needing Support" value="9" change="+28%" changeText="identified" icon={Building} colorClass="red-bg" />
-      </div>
 
       <div className="table-card">
         <div className="table-header-bar flex-between">
@@ -198,82 +191,6 @@ const IndustryCollaboration = () => {
           </div>
         </div>
 
-        <div className="recommendations-card h-full">
-          <div className="chart-header flex-between">
-            <div>
-              <h3><Heart size={18} className="text-blue inline-block mr-2" style={{verticalAlign: 'middle'}}/> Recommended Institutes</h3>
-              <p>Based on your required skills.</p>
-            </div>
-            <a href="#" className="view-details">View All →</a>
-          </div>
-          <div className="recommendations-list">
-            
-            <div className="rec-item">
-              <div className="rec-icon"><Building2 size={24} className="text-blue"/></div>
-              <div className="rec-content">
-                <div className="rec-title-row">
-                  <h4>Government ITI Pune</h4>
-                  <span className="match-tag high">High Match</span>
-                </div>
-                <div className="rec-details">
-                  <span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" className="inline"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pune</span>
-                  <span><span className="status-pill blue-outline" style={{padding: '0 4px', fontSize: '10px'}}>ITI</span></span>
-                </div>
-                <p className="rec-skills">CNC, PLC, Automation</p>
-              </div>
-              <button className="btn outline-btn btn-sm">Request →</button>
-            </div>
-
-            <div className="rec-item">
-              <div className="rec-icon"><Building2 size={24} className="text-blue"/></div>
-              <div className="rec-content">
-                <div className="rec-title-row">
-                  <h4>Government Polytechnic Pune</h4>
-                  <span className="match-tag high">High Match</span>
-                </div>
-                <div className="rec-details">
-                  <span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" className="inline"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pune</span>
-                  <span><span className="status-pill purple-outline" style={{padding: '0 4px', fontSize: '10px'}}>Polytechnic</span></span>
-                </div>
-                <p className="rec-skills">CAD/CAM, Robotics, Mechatronics</p>
-              </div>
-              <button className="btn outline-btn btn-sm">Request →</button>
-            </div>
-
-            <div className="rec-item">
-              <div className="rec-icon"><Building2 size={24} className="text-blue"/></div>
-              <div className="rec-content">
-                <div className="rec-title-row">
-                  <h4>Government ITI Nashik</h4>
-                  <span className="match-tag medium">Medium Match</span>
-                </div>
-                <div className="rec-details">
-                  <span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" className="inline"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Nashik</span>
-                  <span><span className="status-pill blue-outline" style={{padding: '0 4px', fontSize: '10px'}}>ITI</span></span>
-                </div>
-                <p className="rec-skills">Electrical, IoT, HVAC</p>
-              </div>
-              <button className="btn outline-btn btn-sm">Request →</button>
-            </div>
-
-            <div className="rec-item">
-              <div className="rec-icon"><Building2 size={24} className="text-blue"/></div>
-              <div className="rec-content">
-                <div className="rec-title-row">
-                  <h4>Government Polytechnic Nagpur</h4>
-                  <span className="match-tag medium">Medium Match</span>
-                </div>
-                <div className="rec-details">
-                  <span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" className="inline"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Nagpur</span>
-                  <span><span className="status-pill purple-outline" style={{padding: '0 4px', fontSize: '10px'}}>Polytechnic</span></span>
-                </div>
-                <p className="rec-skills">EV, Automobile, Power Systems</p>
-              </div>
-              <button className="btn outline-btn btn-sm">Request →</button>
-            </div>
-
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Target, AlertTriangle, Settings, Users, Plus, Search, MoreHorizontal, Edit3, Trash2, X } from 'lucide-react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 import './IndustrySkills.css';
 
 const SkillKpiCard = ({ title, value, change, icon: Icon, colorClass }) => (
@@ -33,24 +32,6 @@ const IndustrySkills = () => {
     { id: 8, skill: 'Data Analysis', roles: '2 roles', imp: 'Medium', reqLevel: 'Intermediate', avail: 'High', shortage: 'Low' },
   ];
 
-  const pieData = [
-    { name: 'Technical', value: 36, color: '#3b82f6' },
-    { name: 'Soft Skills', value: 12, color: '#a855f7' }
-  ];
-
-  const barData = [
-    { name: 'Technical', count: 36, fill: '#3b82f6' },
-    { name: 'Soft Skills', count: 12, fill: '#a855f7' }
-  ];
-
-  const trendData = [
-    { name: 'PLC', demand: 40, available: 15 },
-    { name: 'Robotics', demand: 35, available: 10 },
-    { name: 'CNC', demand: 30, available: 20 },
-    { name: 'CAD/CAM', demand: 25, available: 18 },
-    { name: 'Safety', demand: 20, available: 35 },
-  ];
-
   return (
     <div className="dashboard-page skills-page relative">
       <div className="page-header">
@@ -63,87 +44,6 @@ const IndustrySkills = () => {
           <div>
             <strong>Better Skills. Stronger Workforce.</strong>
             <p>Connect with the right talent through skill intelligence.</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="skills-kpi-grid">
-        <SkillKpiCard title="Total Required Skills" value="48" change="+12%" icon={Target} colorClass="blue" />
-        <SkillKpiCard title="Critical Skills" value="14" change="+8%" icon={AlertTriangle} colorClass="red" />
-        <SkillKpiCard title="Technical Skills" value="36" change="+10%" icon={Settings} colorClass="blue" />
-        <SkillKpiCard title="Soft Skills" value="12" change="+6%" icon={Users} colorClass="purple" />
-        <SkillKpiCard title="Skills in Shortage" value="18" change="+15%" icon={AlertTriangle} colorClass="red" />
-      </div>
-
-      <div className="skills-chart-card">
-        <div className="chart-header">
-          <div>
-            <h3>Skill Demand Overview</h3>
-            <p>Total demand for required skills across all job roles.</p>
-          </div>
-          <a href="#" className="view-details">View Details →</a>
-        </div>
-        <div className="charts-container">
-          <div className="chart-box pie-box">
-            <div className="pie-wrapper">
-              <ResponsiveContainer width="100%" height={140}>
-                <PieChart>
-                  <Pie data={pieData} cx="50%" cy="50%" innerRadius={45} outerRadius={60} paddingAngle={2} dataKey="value">
-                    {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="pie-center-val">
-                    48
-                  </text>
-                  <text x="50%" y="65%" textAnchor="middle" dominantBaseline="middle" className="pie-center-text">
-                    Total Skills
-                  </text>
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="pie-legend">
-              <div className="legend-item">
-                <span className="dot blue"></span> Technical <span className="val">75% (36)</span>
-              </div>
-              <div className="legend-item">
-                <span className="dot purple"></span> Soft Skills <span className="val">25% (12)</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="chart-box bar-box">
-            <h4>Skill Demand by Category</h4>
-            <div className="bar-wrapper">
-              <ResponsiveContainer width="100%" height={120}>
-                <BarChart data={barData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                  <Bar dataKey="count" radius={[4, 4, 0, 0]} barSize={30}>
-                    {barData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          <div className="chart-box shortage-box">
-            <h4>Shortage Indicator</h4>
-            <div className="shortage-content">
-              <div className="shortage-circle">
-                <span className="val">18</span>
-                <span className="text">Shortage</span>
-              </div>
-              <div className="shortage-legend">
-                <div className="legend-item"><span className="dot red"></span> Critical <span>14</span></div>
-                <div className="legend-item"><span className="dot orange"></span> High <span>4</span></div>
-                <div className="legend-item"><span className="dot yellow"></span> Moderate <span>6</span></div>
-                <div className="legend-item"><span className="dot green"></span> Low <span>3</span></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -220,85 +120,6 @@ const IndustrySkills = () => {
             <button className="page-btn">4</button>
             <button className="page-btn">5</button>
             <button className="page-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 18 6-6-6-6"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div className="bottom-metrics-grid">
-        <div className="metric-card">
-          <div className="metric-header">
-            <h3>Top Skill Demand</h3>
-            <p>Skills with highest industry demand</p>
-          </div>
-          <div className="metric-body">
-            <div className="progress-item">
-              <div className="progress-info"><span>PLC Programming</span> <span>92%</span></div>
-              <div className="progress-bar"><div className="fill blue" style={{width: '92%'}}></div></div>
-            </div>
-            <div className="progress-item">
-              <div className="progress-info"><span>CNC Programming</span> <span>78%</span></div>
-              <div className="progress-bar"><div className="fill blue" style={{width: '78%'}}></div></div>
-            </div>
-            <div className="progress-item">
-              <div className="progress-info"><span>Industrial Robotics</span> <span>71%</span></div>
-              <div className="progress-bar"><div className="fill blue" style={{width: '71%'}}></div></div>
-            </div>
-            <div className="progress-item">
-              <div className="progress-info"><span>CAD/CAM</span> <span>62%</span></div>
-              <div className="progress-bar"><div className="fill blue" style={{width: '62%'}}></div></div>
-            </div>
-            <div className="progress-item">
-              <div className="progress-info"><span>Electrical Maintenance</span> <span>48%</span></div>
-              <div className="progress-bar"><div className="fill blue" style={{width: '48%'}}></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <h3>Skill Shortage Trend</h3>
-            <p>Critical skills with supply deficit</p>
-          </div>
-          <div className="metric-body chart-body">
-            <ResponsiveContainer width="100%" height={160}>
-              <BarChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                <RechartsTooltip cursor={{fill: '#f1f5f9'}} />
-                <Bar dataKey="demand" fill="#3b82f6" radius={[2, 2, 0, 0]} name="Demand" barSize={12} />
-                <Bar dataKey="available" fill="#94a3b8" radius={[2, 2, 0, 0]} name="Available" barSize={12} />
-              </BarChart>
-            </ResponsiveContainer>
-            <div className="legend-center">
-              <span className="dot blue"></span> Demand &nbsp;&nbsp;&nbsp; <span className="dot gray"></span> Available
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <h3>Quick Insights</h3>
-          </div>
-          <div className="metric-body">
-            <ul className="insights-list">
-              <li>
-                <span className="bullet red"></span>
-                <p><strong>PLC Programming</strong> has the highest shortage (Critical).</p>
-              </li>
-              <li>
-                <span className="bullet orange"></span>
-                <p>Industrial Robotics demand is increasing (↑ 18%).</p>
-              </li>
-              <li>
-                <span className="bullet purple"></span>
-                <p>Soft skills are needed in 25% of job roles.</p>
-              </li>
-              <li>
-                <span className="bullet green"></span>
-                <p>Consider partnering with ITIs for basic level skills.</p>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

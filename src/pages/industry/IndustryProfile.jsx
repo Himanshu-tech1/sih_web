@@ -30,18 +30,14 @@ const IndustryProfile = () => {
         <div className="card-body">
           <div className="company-branding">
             <div className="company-logo-large">
-              <svg viewBox="0 0 100 100" width="60" height="60">
-                <path d="M10 30 L50 10 L90 30 L90 40 L50 20 L10 40 Z" fill="#1d4ed8"/>
-                <path d="M30 40 L50 30 L70 40 L70 80 L50 90 L30 80 Z" fill="#1d4ed8"/>
-              </svg>
-              <span className="logo-text">TATA</span>
+              <img src="/images/tata-logo.svg" alt="Tata Logo" />
             </div>
             <div className="company-name-large">
               <h2>Tata Motors Limited</h2>
               <p>Driving a Better Tomorrow</p>
             </div>
             <div className="company-image">
-              <div className="building-silhouette-large"></div>
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Company Office" />
             </div>
           </div>
           
@@ -120,144 +116,6 @@ const IndustryProfile = () => {
         </div>
       </div>
 
-      <div className="profile-grid">
-        <div className="profile-card h-full">
-          <div className="card-header">
-            <div className="card-title-wrap">
-              <Settings size={20} className="text-blue" />
-              <h2>Business Information</h2>
-            </div>
-            <button className="edit-btn"><Edit3 size={14}/> Edit</button>
-          </div>
-          <div className="card-body flex-col-between">
-            <div className="info-grid-1col">
-              <div className="info-item">
-                <span className="label">Company Size</span>
-                <span className="colon">:</span>
-                <span className="value">Large Enterprise</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Number of Employees</span>
-                <span className="colon">:</span>
-                <span className="value">12,500</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Major Products / Services</span>
-                <span className="colon">:</span>
-                <span className="value">Passenger Vehicles, Commercial Vehicles, Electric Vehicles, Auto Components</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Technologies Used</span>
-                <span className="colon">:</span>
-                <span className="value">Robotics, IoT, AI, CAD/CAM, ERP (SAP)</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Machines / Equipment Used</span>
-                <span className="colon">:</span>
-                <span className="value">CNC Machines, Robotic Arms, Press Machines, Assembly Lines, Paint Shop</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Current Workforce</span>
-                <span className="colon">:</span>
-                <div className="value stack">
-                  <span>Skilled - 60%</span>
-                  <span>Semi-Skilled - 30%</span>
-                  <span>Unskilled - 10%</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="promo-banner mt-4">
-              <div className="promo-icon"><Users size={32} className="text-blue" /></div>
-              <div className="promo-content">
-                <strong>Your information helps build a skilled and stronger Maharashtra.</strong>
-                <p>Partnering Industry. Empowering Talent. Building Tomorrow.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="profile-col-right">
-          <div className="profile-card mb-4">
-            <div className="card-header">
-              <div className="card-title-wrap">
-                <Tag size={20} className="text-blue" />
-                <h2>Industry Classification</h2>
-              </div>
-              <button className="edit-btn"><Edit3 size={14}/> Edit</button>
-            </div>
-            <div className="card-body">
-              <div className="info-grid-1col">
-                <div className="info-item">
-                  <span className="label">Primary Sector</span>
-                  <span className="colon">:</span>
-                  <span className="value">Manufacturing</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Secondary Sector</span>
-                  <span className="colon">:</span>
-                  <span className="value">Automotive & Auto Components</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Manufacturing / Service</span>
-                  <span className="colon">:</span>
-                  <span className="value">Manufacturing</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Major Job Roles</span>
-                  <span className="colon">:</span>
-                  <span className="value">Production Operator, Machine Technician, Quality Inspector, Maintenance Engineer, Assembly Line Supervisor</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Production Technologies</span>
-                  <span className="colon">:</span>
-                  <span className="value">Automated Assembly, EV Manufacturing, CNC Machining, Robotics, Lean Manufacturing</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="profile-card">
-            <div className="card-header bg-slate-50">
-              <div className="card-title-wrap">
-                <Landmark size={20} className="text-blue" />
-                <h2>Government Data</h2>
-              </div>
-              <span className="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> View Only</span>
-            </div>
-            <div className="card-body">
-              <div className="info-grid-1col">
-                <div className="info-item">
-                  <span className="label">Industry ID</span>
-                  <span className="colon">:</span>
-                  <span className="value">MH-IND-0004521</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Registration Status</span>
-                  <span className="colon">:</span>
-                  <span className="value text-green font-medium">Active</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Last Data Update</span>
-                  <span className="colon">:</span>
-                  <span className="value">12 Aug 2025, 14:30</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Verification Date</span>
-                  <span className="colon">:</span>
-                  <span className="value">05 Aug 2025</span>
-                </div>
-                <div className="info-item">
-                  <span className="label">Verified By</span>
-                  <span className="colon">:</span>
-                  <span className="value">Maharashtra Industrial Development Corporation (MIDC)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
       <div className="page-actions-bottom">
         <button className="btn outline-btn"><Edit3 size={16}/> Edit Profile</button>
         <button className="btn primary-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.24l5.08 5.08"/></svg> Update Information</button>

@@ -3,9 +3,33 @@ import { useNavigate, Link } from 'react-router-dom';
 import './StudentAuth.css';
 import '../../layouts/AuthLayout.css';
 
+const MAHARASHTRA_DISTRICTS = [
+  "Ahmednagar", "Akola", "Amravati", "Aurangabad", "Beed", "Bhandara", "Buldhana", 
+  "Chandrapur", "Dhule", "Gadchiroli", "Gondia", "Hingoli", "Jalgaon", "Jalna", 
+  "Kolhapur", "Latur", "Mumbai City", "Mumbai Suburban", "Nagpur", "Nanded", 
+  "Nandurbar", "Nashik", "Osmanabad", "Palghar", "Parbhani", "Pune", "Raigad", 
+  "Ratnagiri", "Sangli", "Satara", "Sindhudurg", "Solapur", "Thane", "Wardha", 
+  "Washim", "Yavatmal"
+];
+
 const StudentAuth = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [registerData, setRegisterData] = useState({
+    fullName: '',
+    educationLevel: '',
+    instituteName: '',
+    tradeBranch: '',
+    yearOfStudy: '',
+    location: '',
+    email: '',
+    password: ''
+  });
+
+  const handleRegisterChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -133,7 +157,7 @@ const StudentAuth = () => {
                   <label>Full Name</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-                    <input type="text" placeholder="Enter your full name" required />
+                    <input type="text" name="fullName" value={registerData.fullName} onChange={handleRegisterChange} placeholder="Enter your full name" required />
                   </div>
                 </div>
 
@@ -141,15 +165,20 @@ const StudentAuth = () => {
                   <label>Education Level</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-                    <select required><option value="">Select education level</option></select>
+                    <select name="educationLevel" value={registerData.educationLevel} onChange={handleRegisterChange} required>
+                      <option value="">Select education level</option>
+                      <option value="ITI">ITI</option>
+                      <option value="Polytechnic">Polytechnic</option>
+                      <option value="BTech">B.Tech</option>
+                    </select>
                   </div>
                 </div>
 
                 <div className="input-group">
-                  <label>ITI / Polytechnic</label>
+                  <label>Institute Name</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-                    <select required><option value="">Select ITI / Polytechnic</option></select>
+                    <input type="text" name="instituteName" value={registerData.instituteName} onChange={handleRegisterChange} placeholder="Enter your institute name" required />
                   </div>
                 </div>
 
@@ -157,18 +186,30 @@ const StudentAuth = () => {
                   <label>Trade / Diploma Branch</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-                    <input type="text" placeholder="Enter your trade / diploma branch" required />
+                    <input type="text" name="tradeBranch" value={registerData.tradeBranch} onChange={handleRegisterChange} placeholder="Enter your trade / diploma branch" required />
                   </div>
                 </div>
 
                 <div className="form-grid-2">
                   <div className="input-group">
                     <label>Year of Study</label>
-                    <select required><option value="">Select year</option></select>
+                    <select name="yearOfStudy" value={registerData.yearOfStudy} onChange={handleRegisterChange} required>
+                      <option value="">Select year</option>
+                      <option value="1">1st Year</option>
+                      <option value="2">2nd Year</option>
+                      <option value="3">3rd Year</option>
+                      <option value="4">4th Year</option>
+                      <option value="passout">Passout / Graduated</option>
+                    </select>
                   </div>
                   <div className="input-group">
                     <label>Location</label>
-                    <select required><option value="">Select location</option></select>
+                    <select name="location" value={registerData.location} onChange={handleRegisterChange} required>
+                      <option value="">Select district</option>
+                      {MAHARASHTRA_DISTRICTS.map(district => (
+                        <option key={district} value={district}>{district}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -176,7 +217,7 @@ const StudentAuth = () => {
                   <label>Email</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-                    <input type="email" placeholder="Enter your email address" required />
+                    <input type="email" name="email" value={registerData.email} onChange={handleRegisterChange} placeholder="Enter your email address" required />
                   </div>
                 </div>
 
@@ -184,7 +225,7 @@ const StudentAuth = () => {
                   <label>Password</label>
                   <div className="input-icon-wrapper">
                     <span className="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-                    <input type="password" placeholder="Create a strong password" required />
+                    <input type="password" name="password" value={registerData.password} onChange={handleRegisterChange} placeholder="Create a strong password" minLength={8} required />
                     <span className="input-icon-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
                   </div>
                 </div>

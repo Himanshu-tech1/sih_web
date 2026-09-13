@@ -80,43 +80,6 @@ const InstituteCourses = () => {
         </div>
       </div>
 
-      <div className="filters-bar">
-        <div className="filter-group">
-          <label>Institute Type</label>
-          <div className="select-wrapper">
-            <select><option>ITI</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <div className="filter-group">
-          <label>Trade / Diploma</label>
-          <div className="select-wrapper">
-            <select><option>All</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <div className="filter-group">
-          <label>Sector</label>
-          <div className="select-wrapper">
-            <select><option>All</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <div className="filter-group">
-          <label>Training Year</label>
-          <div className="select-wrapper">
-            <select><option>All</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-        <div className="filter-group">
-          <label>Status</label>
-          <div className="select-wrapper">
-            <select><option>All</option></select>
-            <ChevronDown size={16} />
-          </div>
-        </div>
-      </div>
 
       <div className="main-content-area">
         <div className="left-panel">

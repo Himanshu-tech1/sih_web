@@ -34,42 +34,83 @@ const StudentJobs = () => {
         <div className="filter-group">
           <label><Briefcase size={12} /> Job Role</label>
           <div className="select-wrapper">
-            <select><option>All Job Roles</option></select>
+            <select>
+              <option>All Job Roles</option>
+              <option>CNC Machine Operator</option>
+              <option>PLC Technician</option>
+              <option>Industrial Electrician</option>
+              <option>Quality Control Inspector</option>
+              <option>Fitter</option>
+              <option>Welder</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
         <div className="filter-group">
           <label><Building2 size={12} /> Industry</label>
           <div className="select-wrapper">
-            <select><option>All Industries</option></select>
+            <select>
+              <option>All Industries</option>
+              <option>Manufacturing</option>
+              <option>Automotive</option>
+              <option>Electrical</option>
+              <option>Construction</option>
+              <option>Automation</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
         <div className="filter-group">
           <label><MapPin size={12} /> Location</label>
           <div className="select-wrapper">
-            <select><option>All Locations</option></select>
+            <select>
+              <option>All Locations</option>
+              <option>Pune, Maharashtra</option>
+              <option>Mumbai, Maharashtra</option>
+              <option>Nashik, Maharashtra</option>
+              <option>Nagpur, Maharashtra</option>
+              <option>Aurangabad, Maharashtra</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
         <div className="filter-group">
           <label><GraduationCap size={12} /> Qualification</label>
           <div className="select-wrapper">
-            <select><option>All Qualifications</option></select>
+            <select>
+              <option>All Qualifications</option>
+              <option>ITI</option>
+              <option>Polytechnic Diploma</option>
+              <option>B.Tech / B.E.</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
         <div className="filter-group">
           <label><Settings size={12} /> Skill</label>
           <div className="select-wrapper">
-            <select><option>All Skills</option></select>
+            <select>
+              <option>All Skills</option>
+              <option>CNC Programming</option>
+              <option>PLC Programming</option>
+              <option>Electrical Wiring</option>
+              <option>AutoCAD</option>
+              <option>Quality Control</option>
+              <option>Machine Operation</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>
         <div className="filter-group">
           <label><Clock size={12} /> Experience</label>
           <div className="select-wrapper">
-            <select><option>All Experience Levels</option></select>
+            <select>
+              <option>All Experience Levels</option>
+              <option>Fresher (0 Years)</option>
+              <option>0 - 2 Years</option>
+              <option>2 - 5 Years</option>
+              <option>5+ Years</option>
+            </select>
             <ChevronDown size={16} />
           </div>
         </div>

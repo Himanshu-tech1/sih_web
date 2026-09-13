@@ -22,25 +22,16 @@ const StudentLayout = () => {
 
         <nav className="sidebar-nav">
           <NavLink to="/student/dashboard" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Home size={18} /> Overview
-          </NavLink>
-          <NavLink to="/student/dashboard/profile" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <User size={18} /> My Profile
-          </NavLink>
-          <NavLink to="/student/dashboard/assessment" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <ClipboardList size={18} /> Skill Assessment
-          </NavLink>
-          <NavLink to="/student/dashboard/my-gap" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Target size={18} /> My Skill Gap
-          </NavLink>
-          <NavLink to="/student/dashboard/career-match" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Briefcase size={18} /> Career / Job Role Match
           </NavLink>
           <NavLink to="/student/dashboard/learning" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <BookOpen size={18} /> Learning Recommendations
           </NavLink>
           <NavLink to="/student/dashboard/jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Search size={18} /> Job Opportunities
+          </NavLink>
+          <NavLink to="/student/dashboard/profile" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
+            <User size={18} /> My Profile
           </NavLink>
         </nav>
 

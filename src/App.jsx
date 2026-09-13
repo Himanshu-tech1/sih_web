@@ -6,11 +6,8 @@ import IndustryLogin from './pages/industry/IndustryLogin';
 import IndustryRegister from './pages/industry/IndustryRegister';
 import StudentAuth from './pages/student/StudentAuth';
 import StudentLayout from './layouts/StudentLayout';
-import StudentOverview from './pages/student/StudentOverview';
 import StudentProfile from './pages/student/StudentProfile';
 import StudentAssessment from './pages/student/StudentAssessment';
-import StudentCareerMatch from './pages/student/StudentCareerMatch';
-import StudentSkillGap from './pages/student/StudentSkillGap';
 import StudentLearning from './pages/student/StudentLearning';
 import StudentJobs from './pages/student/StudentJobs';
 
@@ -19,14 +16,12 @@ import IndustryOverview from './pages/industry/IndustryOverview';
 import IndustryProfile from './pages/industry/IndustryProfile';
 import IndustryJobs from './pages/industry/IndustryJobs';
 import IndustrySkills from './pages/industry/IndustrySkills';
-import IndustryFutureSkills from './pages/industry/IndustryFutureSkills';
 import IndustrySkillGap from './pages/industry/IndustrySkillGap';
-import IndustrySkillDemand from './pages/industry/IndustrySkillDemand';
 import IndustryCollaboration from './pages/industry/IndustryCollaboration';
 import IndustrySettings from './pages/industry/IndustrySettings';
 
 import InstituteLayout from './layouts/InstituteLayout';
-import InstituteOverview from './pages/institute/InstituteOverview';
+
 import InstituteProfile from './pages/institute/InstituteProfile';
 import InstituteCourses from './pages/institute/InstituteCourses';
 import InstituteSkillsTaught from './pages/institute/InstituteSkillsTaught';
@@ -46,8 +41,7 @@ function App() {
         
         {/* Institute Dashboard Routes */}
         <Route path="/institute/dashboard" element={<InstituteLayout />}>
-          <Route index element={<InstituteOverview />} />
-          <Route path="profile" element={<InstituteProfile />} />
+          <Route index element={<InstituteProfile />} />
           <Route path="courses" element={<InstituteCourses />} />
           <Route path="skills-taught" element={<InstituteSkillsTaught />} />
           <Route path="industry-requirements" element={<InstituteIndustryReq />} />
@@ -65,9 +59,7 @@ function App() {
           <Route path="profile" element={<IndustryProfile />} />
           <Route path="jobs" element={<IndustryJobs />} />
           <Route path="skills" element={<IndustrySkills />} />
-          <Route path="future-skills" element={<IndustryFutureSkills />} />
           <Route path="skill-gap" element={<IndustrySkillGap />} />
-          <Route path="skill-demand" element={<IndustrySkillDemand />} />
           <Route path="collaboration" element={<IndustryCollaboration />} />
           <Route path="settings" element={<IndustrySettings />} />
           {/* We will add more routes here later */}
@@ -78,13 +70,10 @@ function App() {
         
         {/* Student Dashboard Routes */}
         <Route path="/student/dashboard" element={<StudentLayout />}>
-          <Route index element={<StudentOverview />} />
-          <Route path="profile" element={<StudentProfile />} />
-          <Route path="assessment" element={<StudentAssessment />} />
-          <Route path="career-match" element={<StudentCareerMatch />} />
-          <Route path="my-gap" element={<StudentSkillGap />} />
+          <Route index element={<StudentAssessment />} />
           <Route path="learning" element={<StudentLearning />} />
           <Route path="jobs" element={<StudentJobs />} />
+          <Route path="profile" element={<StudentProfile />} />
         </Route>
       </Routes>
     </Router>

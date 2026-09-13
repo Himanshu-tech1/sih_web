@@ -16,8 +16,6 @@ const IndustryLayout = () => {
     { name: 'Company Profile', path: '/employer/dashboard/profile', icon: Building2 },
     { name: 'Job Openings', path: '/employer/dashboard/jobs', icon: Briefcase },
     { name: 'Required Skills', path: '/employer/dashboard/skills', icon: Target },
-    { name: 'Skill Demand', path: '/employer/dashboard/skill-demand', icon: LineChart },
-    { name: 'Future & Emerging Skills', path: '/employer/dashboard/future-skills', icon: Lightbulb },
     { name: 'Skill Gap Feedback', path: '/employer/dashboard/gap-feedback', icon: MessageSquare },
     { name: 'Institute Collaboration', path: '/employer/dashboard/collaboration', icon: Users },
     { name: 'Apprenticeship & Internship', path: '/employer/dashboard/apprenticeship', icon: Award },
@@ -48,12 +46,6 @@ const IndustryLayout = () => {
           </NavLink>
           <NavLink to="/employer/dashboard/skills" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Target size={18} /> Required Skills
-          </NavLink>
-          <NavLink to="/employer/dashboard/skill-demand" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <LineChart size={18} /> Skill Demand
-          </NavLink>
-          <NavLink to="/employer/dashboard/future-skills" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Lightbulb size={18} /> Future & Emerging Skills
           </NavLink>
           <NavLink to="/employer/dashboard/skill-gap" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <MessageSquare size={18} /> Skill Gap Feedback

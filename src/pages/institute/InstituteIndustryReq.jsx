@@ -85,52 +85,6 @@ const InstituteIndustryReq = () => {
         </button>
       </div>
 
-      <div className="metrics-grid">
-        <div className="metric-card">
-          <div className="metric-header">
-            <div className="metric-icon green"><Target size={20} /></div>
-            <span>High-Demand Skills</span>
-          </div>
-          <div className="metric-value">28</div>
-          <div className="metric-trend positive">+12% from last quarter</div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <div className="metric-icon blue"><Briefcase size={20} /></div>
-            <span>High-Demand Job Roles</span>
-          </div>
-          <div className="metric-value">16</div>
-          <div className="metric-trend positive">+8% from last quarter</div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <div className="metric-icon orange"><Lightbulb size={20} /></div>
-            <span>Emerging Skills</span>
-          </div>
-          <div className="metric-value">12</div>
-          <div className="metric-trend positive">+5% from last quarter</div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <div className="metric-icon red"><AlertTriangle size={20} /></div>
-            <span>Skills Not Covered</span>
-          </div>
-          <div className="metric-value">9</div>
-          <div className="metric-trend negative">-3% from last quarter</div>
-        </div>
-
-        <div className="metric-card">
-          <div className="metric-header">
-            <div className="metric-icon purple"><Building2 size={20} /></div>
-            <span>Relevant Industries</span>
-          </div>
-          <div className="metric-value">8</div>
-          <div className="metric-trend positive">+2% from last quarter</div>
-        </div>
-      </div>
 
       <div className="main-content-area">
         <div className="left-panel">
