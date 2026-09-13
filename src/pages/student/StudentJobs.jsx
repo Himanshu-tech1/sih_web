@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Briefcase, Target, ChevronDown, MapPin, Building2, GraduationCap, 
-  Settings, Clock, CheckCircle2, Star, Calendar, Heart, Send, Lightbulb, AlertTriangle, ArrowRight, Zap
+  Settings, Clock, CheckCircle2, Star, Calendar, Heart, Send, Lightbulb, AlertTriangle, ArrowRight, Zap, Sparkles
 } from 'lucide-react';
 import './StudentJobs.css';
 
@@ -9,6 +10,47 @@ const StudentJobs = () => {
   return (
     <div className="student-jobs">
       
+      {/* Live Industry Hiring Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+        borderRadius: '12px',
+        padding: '1rem 1.5rem',
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1.5rem',
+        boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.2)', padding: '10px', borderRadius: '10px' }}>
+            <Sparkles size={24} />
+          </div>
+          <div>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: '700', margin: 0 }}>Looking for newly published openings from employers?</h3>
+            <p style={{ fontSize: '0.85rem', margin: '2px 0 0 0', opacity: 0.9 }}>Check real-time jobs directly published by Maharashtra industries on the portal.</p>
+          </div>
+        </div>
+        <Link 
+          to="/student/dashboard/industry-jobs"
+          style={{
+            backgroundColor: 'white',
+            color: '#1e40af',
+            padding: '8px 18px',
+            borderRadius: '8px',
+            fontWeight: '600',
+            fontSize: '0.875rem',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+        >
+          View Live Industry Jobs <ArrowRight size={16} />
+        </Link>
+      </div>
+
       {/* Header */}
       <div className="page-header">
         <div className="header-title">

@@ -10,6 +10,7 @@ import StudentProfile from './pages/student/StudentProfile';
 import StudentAssessment from './pages/student/StudentAssessment';
 import StudentLearning from './pages/student/StudentLearning';
 import StudentJobs from './pages/student/StudentJobs';
+import StudentIndustryJobs from './pages/student/StudentIndustryJobs';
 
 import IndustryLayout from './layouts/IndustryLayout';
 import IndustryProfile from './pages/industry/IndustryProfile';
@@ -26,6 +27,7 @@ import InstituteCourses from './pages/institute/InstituteCourses';
 import InstituteSkillsTaught from './pages/institute/InstituteSkillsTaught';
 import InstituteSkillGap from './pages/institute/InstituteSkillGap';
 import InstituteCollaboration from './pages/institute/InstituteCollaboration';
+import InstituteIndustryJobs from './pages/institute/InstituteIndustryJobs';
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
           <Route index element={<InstituteProfile />} />
           <Route path="courses" element={<InstituteCourses />} />
           <Route path="skills-taught" element={<InstituteSkillsTaught />} />
+          <Route path="industry-jobs" element={<InstituteIndustryJobs />} />
           <Route path="skill-gap" element={<InstituteSkillGap />} />
           <Route path="collaboration" element={<InstituteCollaboration />} />
         </Route>
@@ -69,6 +72,7 @@ function App() {
           <Route index element={<StudentAssessment />} />
           <Route path="learning" element={<StudentLearning />} />
           <Route path="jobs" element={<StudentJobs />} />
+          <Route path="industry-jobs" element={<StudentIndustryJobs />} />
           <Route path="profile" element={<StudentProfile />} />
         </Route>
       </Routes>

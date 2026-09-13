@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { 
   Home, Building2, BookOpen, Settings, BarChart2, 
-  Target, Users, Lightbulb, Bell, Search, Menu, ArrowLeft
+  Target, Users, Lightbulb, Bell, Search, Menu, ArrowLeft, Briefcase
 } from 'lucide-react';
 import './InstituteLayout.css';
 
@@ -24,6 +24,9 @@ const InstituteLayout = () => {
           <div className="nav-group-title">Institute Dashboard</div>
           <NavLink to="/institute/dashboard" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Building2 size={18} /> Institute Profile
+          </NavLink>
+          <NavLink to="/institute/dashboard/industry-jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
+            <Briefcase size={18} /> Industry Job Openings
           </NavLink>
           <NavLink to="/institute/dashboard/courses" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <BookOpen size={18} /> Courses & Curriculum

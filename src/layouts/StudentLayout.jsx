@@ -30,6 +30,9 @@ const StudentLayout = () => {
           <NavLink to="/student/dashboard/jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Search size={18} /> Job Opportunities
           </NavLink>
+          <NavLink to="/student/dashboard/industry-jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
+            <Briefcase size={18} /> Industry Job Openings
+          </NavLink>
           <NavLink to="/student/dashboard/profile" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <User size={18} /> My Profile
           </NavLink>
