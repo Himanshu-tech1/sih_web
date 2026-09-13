@@ -58,7 +58,7 @@ const StudentJobs = () => {
             <Briefcase size={24} />
           </div>
           <div>
-            <h1>Job Opportunities</h1>
+            <h1>Job and Internship Opportunity</h1>
             <p>Find the right job opportunities based on your education, skills and career preferences.</p>
           </div>
         </div>
@@ -78,6 +78,7 @@ const StudentJobs = () => {
           <div className="select-wrapper">
             <select>
               <option>All Job Roles</option>
+              <option>Internship</option>
               <option>CNC Machine Operator</option>
               <option>PLC Technician</option>
               <option>Industrial Electrician</option>
@@ -107,6 +108,7 @@ const StudentJobs = () => {
           <div className="select-wrapper">
             <select>
               <option>All Locations</option>
+              <option>Online</option>
               <option>Pune, Maharashtra</option>
               <option>Mumbai, Maharashtra</option>
               <option>Nashik, Maharashtra</option>
