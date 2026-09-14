@@ -43,9 +43,6 @@ const IndustryLayout = () => {
           <NavLink to="/employer/dashboard/jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Briefcase size={18} /> Job Openings
           </NavLink>
-          <NavLink to="/employer/dashboard/skills" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <Target size={18} /> Required Skills
-          </NavLink>
           <NavLink to="/employer/dashboard/skill-gap" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <MessageSquare size={18} /> Skill Gap Feedback
           </NavLink>

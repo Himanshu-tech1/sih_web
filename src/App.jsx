@@ -14,7 +14,6 @@ import StudentIndustryJobs from './pages/student/StudentIndustryJobs';
 import IndustryLayout from './layouts/IndustryLayout';
 import IndustryProfile from './pages/industry/IndustryProfile';
 import IndustryJobs from './pages/industry/IndustryJobs';
-import IndustrySkills from './pages/industry/IndustrySkills';
 import IndustrySkillGap from './pages/industry/IndustrySkillGap';
 import IndustryCollaboration from './pages/industry/IndustryCollaboration';
 import IndustrySettings from './pages/industry/IndustrySettings';
@@ -54,8 +53,8 @@ function App() {
         <Route path="/employer/dashboard" element={<IndustryLayout />}>
           <Route index element={<IndustryProfile />} />
           <Route path="jobs" element={<IndustryJobs />} />
-          <Route path="skills" element={<IndustrySkills />} />
           <Route path="skill-gap" element={<IndustrySkillGap />} />
+          <Route path="skills" element={<IndustrySkillGap />} />
           <Route path="collaboration" element={<IndustryCollaboration />} />
           <Route path="settings" element={<IndustrySettings />} />
           {/* We will add more routes here later */}
