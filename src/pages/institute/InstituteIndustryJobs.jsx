@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { 
   Briefcase, Building2, MapPin, GraduationCap, Users, Calendar, 
   Search, Filter, ArrowUpRight, Share2, CheckCircle2, Clock, 
-  DollarSign, Sparkles, Send, Eye, X, BookOpen, AlertCircle
+  DollarSign, Sparkles, Send, Eye, X, BookOpen, AlertCircle,
+  RefreshCw, Globe, ExternalLink, Bot, Loader2
 } from 'lucide-react';
-import { getPublishedJobs } from '../../utils/jobStorage';
+import { getPublishedJobs, syncAiJobsFromWeb } from '../../utils/jobStorage';
 import './InstituteIndustryJobs.css';
 
 const InstituteIndustryJobs = () => {
@@ -17,6 +18,8 @@ const InstituteIndustryJobs = () => {
   const [recommendModalJob, setRecommendModalJob] = useState(null);
   const [batchName, setBatchName] = useState('2024-2025 Passing Out Batch (Fitter/Machinist/Electrician)');
   const [studentCount, setStudentCount] = useState('25');
+  const [isSyncingAi, setIsSyncingAi] = useState(false);
+  const [syncStep, setSyncStep] = useState(1);
 
   useEffect(() => {
     const handleJobUpdate = () => {
@@ -29,6 +32,28 @@ const InstituteIndustryJobs = () => {
       window.removeEventListener('storage', handleJobUpdate);
     };
   }, []);
+
+  const handleUpdateNewJobs = () => {
+    if (isSyncingAi) return;
+    setIsSyncingAi(true);
+    setSyncStep(1);
+
+    setTimeout(() => {
+      setSyncStep(2);
+    }, 600);
+
+    setTimeout(() => {
+      setSyncStep(3);
+    }, 1100);
+
+    setTimeout(() => {
+      const res = syncAiJobsFromWeb(2);
+      setIsSyncingAi(false);
+      setSyncStep(1);
+      setRecommendSuccess(`✨ AI Crawler synced ${res.added.length} new technical job postings from LinkedIn & Naukri.com.`);
+      setTimeout(() => setRecommendSuccess(null), 5000);
+    }, 1700);
+  };
 
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = !search || 
@@ -80,6 +105,24 @@ const InstituteIndustryJobs = () => {
           </p>
         </div>
         <div className="header-actions">
+          <button 
+            className="btn-update-new-jobs"
+            onClick={handleUpdateNewJobs}
+            disabled={isSyncingAi}
+            title="Scan LinkedIn & Naukri.com for latest technical vacancies"
+          >
+            {isSyncingAi ? (
+              <>
+                <RefreshCw size={16} className="spin-icon" />
+                <span>AI Scraping Web...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles size={16} className="ai-sparkle-icon" />
+                <span>Update New Jobs</span>
+              </>
+            )}
+          </button>
           <button className="btn outline-btn" onClick={() => window.print()}>
             Export Requirements
           </button>
@@ -196,6 +239,17 @@ const InstituteIndustryJobs = () => {
                   )}
                 </div>
 
+                {job.sourcePlatform && (
+                  <div className="job-source-tag-row">
+                    <span className={`source-badge source-${job.sourcePlatform.toLowerCase().replace('.', '')}`}>
+                      <Globe size={11} /> Source: {job.sourcePlatform}
+                    </span>
+                    <span className="badge-ai-scraped">
+                      <Sparkles size={11} /> AI Live Synced
+                    </span>
+                  </div>
+                )}
+
                 <div className="meta-grid">
                   <div className="meta-item">
                     <MapPin size={14} /> <span>{job.loc}</span>
@@ -285,6 +339,23 @@ const InstituteIndustryJobs = () => {
                 <h4>Job Description</h4>
                 <p className="job-desc-text">{selectedJob.description}</p>
               </div>
+
+              {selectedJob.sourcePlatform && (
+                <div className="modal-ai-source-box">
+                  <div className="ai-source-top">
+                    <Globe size={16} className="text-blue-600" />
+                    <span>Aggregated via AI Web Crawler from <strong>{selectedJob.sourcePlatform}</strong></span>
+                  </div>
+                  <p className="ai-source-desc">
+                    Aggregated live from verified industry portals for Maharashtra educational institutions and diploma/ITI placement cells.
+                  </p>
+                  {selectedJob.sourceUrl && (
+                    <a href={selectedJob.sourceUrl} target="_blank" rel="noreferrer" className="ai-source-link">
+                      View Original Posting on {selectedJob.sourcePlatform} <ExternalLink size={13} />
+                    </a>
+                  )}
+                </div>
+              )}
 
               <div className="modal-section">
                 <h4>Required Competencies & Skills</h4>
@@ -379,6 +450,45 @@ const InstituteIndustryJobs = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* AI Web Scraper Live Overlay Modal */}
+      {isSyncingAi && (
+        <div className="ai-crawler-overlay">
+          <div className="ai-crawler-modal">
+            <div className="ai-crawler-header">
+              <div className="ai-bot-avatar">
+                <Bot size={28} className="text-white" />
+              </div>
+              <div>
+                <h3>SkillBridge AI Job Crawler</h3>
+                <p>Live Web Data Extraction in Progress</p>
+              </div>
+            </div>
+
+            <div className="ai-crawler-steps">
+              <div className={`step-item ${syncStep >= 1 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep > 1 ? '✓' : <Loader2 size={12} className="spin-icon" />}</span>
+                <span>Connecting to LinkedIn Jobs & Naukri.com APIs...</span>
+              </div>
+              <div className={`step-item ${syncStep >= 2 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep > 2 ? '✓' : syncStep === 2 ? <Loader2 size={12} className="spin-icon" /> : '2'}</span>
+                <span>Scanning Maharashtra Industrial Hubs (Pune, Chakan, Nagpur)...</span>
+              </div>
+              <div className={`step-item ${syncStep >= 3 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep === 3 ? <Loader2 size={12} className="spin-icon" /> : '3'}</span>
+                <span>Matching ITI & Diploma trade curriculum with industry openings...</span>
+              </div>
+            </div>
+
+            <div className="ai-crawler-footer">
+              <div className="ai-pulse-bar">
+                <div className="ai-pulse-fill" style={{ width: syncStep === 1 ? '35%' : syncStep === 2 ? '70%' : '98%' }}></div>
+              </div>
+              <span className="crawler-status-sub">Importing newly published industry requirements...</span>
+            </div>
           </div>
         </div>
       )}

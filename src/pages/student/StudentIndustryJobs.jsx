@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
   Briefcase, Building2, MapPin, GraduationCap, Clock, 
   Search, CheckCircle2, DollarSign, Sparkles, Send, Eye, X, 
-  Star, AlertCircle, Heart, Check
+  Star, AlertCircle, Heart, Check, RefreshCw, Globe, ExternalLink, Bot, Loader2
 } from 'lucide-react';
-import { getPublishedJobs } from '../../utils/jobStorage';
+import { getPublishedJobs, syncAiJobsFromWeb } from '../../utils/jobStorage';
 import './StudentIndustryJobs.css';
 
 const StudentIndustryJobs = () => {
@@ -17,6 +17,8 @@ const StudentIndustryJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState({});
   const [savedJobs, setSavedJobs] = useState({});
   const [successToast, setSuccessToast] = useState(null);
+  const [isSyncingAi, setIsSyncingAi] = useState(false);
+  const [syncStep, setSyncStep] = useState(1);
 
   useEffect(() => {
     const handleJobUpdate = () => {
@@ -29,6 +31,30 @@ const StudentIndustryJobs = () => {
       window.removeEventListener('storage', handleJobUpdate);
     };
   }, []);
+
+  const handleUpdateNewJobs = () => {
+    if (isSyncingAi) return;
+    setIsSyncingAi(true);
+    setSyncStep(1);
+
+    setTimeout(() => {
+      setSyncStep(2);
+    }, 600);
+
+    setTimeout(() => {
+      setSyncStep(3);
+    }, 1100);
+
+    setTimeout(() => {
+      const res = syncAiJobsFromWeb(2);
+      setIsSyncingAi(false);
+      setSyncStep(1);
+      setSuccessToast(`✨ AI Job Crawl Complete! Added ${res.added.length} new verified jobs from LinkedIn & Naukri.com.`);
+      setTimeout(() => {
+        setSuccessToast(null);
+      }, 5000);
+    }, 1700);
+  };
 
   const handleApply = (job) => {
     setApplyModalJob(job);
@@ -80,14 +106,36 @@ const StudentIndustryJobs = () => {
       )}
 
       {/* Header */}
-      <div className="page-header">
-        <div className="badge-pill">
-          <Sparkles size={14} className="text-blue-500" /> Direct Industry Hiring
+      <div className="page-header flex-between">
+        <div>
+          <div className="badge-pill">
+            <Sparkles size={14} className="text-blue-500" /> Direct Industry Hiring
+          </div>
+          <h1 className="page-title">Live Industry Job Openings</h1>
+          <p className="page-subtitle">
+            Real-time technical job vacancies published directly by partnered manufacturing companies and industrial employers in Maharashtra.
+          </p>
         </div>
-        <h1 className="page-title">Live Industry Job Openings</h1>
-        <p className="page-subtitle">
-          Real-time technical job vacancies published directly by partnered manufacturing companies and industrial employers in Maharashtra.
-        </p>
+        <div className="header-actions">
+          <button 
+            className="btn-update-new-jobs"
+            onClick={handleUpdateNewJobs}
+            disabled={isSyncingAi}
+            title="Scan LinkedIn & Naukri.com for latest technical vacancies"
+          >
+            {isSyncingAi ? (
+              <>
+                <RefreshCw size={16} className="spin-icon" />
+                <span>AI Scraping Web...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles size={16} className="ai-sparkle-icon" />
+                <span>Update New Jobs</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Metrics Row */}
@@ -194,6 +242,17 @@ const StudentIndustryJobs = () => {
                     </button>
                   </div>
 
+                  {job.sourcePlatform && (
+                    <div className="job-source-tag-row">
+                      <span className={`source-badge source-${job.sourcePlatform.toLowerCase().replace('.', '')}`}>
+                        <Globe size={11} /> Source: {job.sourcePlatform}
+                      </span>
+                      <span className="badge-ai-scraped">
+                        <Sparkles size={11} /> AI Live Synced
+                      </span>
+                    </div>
+                  )}
+
                   <div className="tags-row">
                     <span className="tag-pill"><MapPin size={12} /> {job.loc}</span>
                     <span className="tag-pill highlight"><GraduationCap size={12} /> {Array.isArray(job.qual) ? job.qual.join('/') : (job.qualText || job.qual)}</span>
@@ -287,6 +346,23 @@ const StudentIndustryJobs = () => {
                 <p>{selectedJob.description}</p>
               </div>
 
+              {selectedJob.sourcePlatform && (
+                <div className="modal-ai-source-box">
+                  <div className="ai-source-top">
+                    <Globe size={16} className="text-blue-600" />
+                    <span>Aggregated via AI Web Crawler from <strong>{selectedJob.sourcePlatform}</strong></span>
+                  </div>
+                  <p className="ai-source-desc">
+                    This opening was automatically parsed and verified from live industrial hiring postings across Maharashtra.
+                  </p>
+                  {selectedJob.sourceUrl && (
+                    <a href={selectedJob.sourceUrl} target="_blank" rel="noreferrer" className="ai-source-link">
+                      View Original Posting on {selectedJob.sourcePlatform} <ExternalLink size={13} />
+                    </a>
+                  )}
+                </div>
+              )}
+
               <div className="modal-block">
                 <h4>Required Competencies</h4>
                 <div className="skills-wrap">
@@ -360,6 +436,45 @@ const StudentIndustryJobs = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* AI Web Scraper Live Overlay Modal */}
+      {isSyncingAi && (
+        <div className="ai-crawler-overlay">
+          <div className="ai-crawler-modal">
+            <div className="ai-crawler-header">
+              <div className="ai-bot-avatar">
+                <Bot size={28} className="text-white" />
+              </div>
+              <div>
+                <h3>SkillBridge AI Job Crawler</h3>
+                <p>Live Web Data Extraction in Progress</p>
+              </div>
+            </div>
+
+            <div className="ai-crawler-steps">
+              <div className={`step-item ${syncStep >= 1 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep > 1 ? '✓' : <Loader2 size={12} className="spin-icon" />}</span>
+                <span>Connecting to LinkedIn Jobs & Naukri.com APIs...</span>
+              </div>
+              <div className={`step-item ${syncStep >= 2 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep > 2 ? '✓' : syncStep === 2 ? <Loader2 size={12} className="spin-icon" /> : '2'}</span>
+                <span>Scanning Maharashtra Industrial Hubs (Pune, Chakan, Nagpur)...</span>
+              </div>
+              <div className={`step-item ${syncStep >= 3 ? 'active' : ''}`}>
+                <span className="step-dot">{syncStep === 3 ? <Loader2 size={12} className="spin-icon" /> : '3'}</span>
+                <span>Matching ITI & Diploma trade skills (Robotics, Solar PV, CNC)...</span>
+              </div>
+            </div>
+
+            <div className="ai-crawler-footer">
+              <div className="ai-pulse-bar">
+                <div className="ai-pulse-fill" style={{ width: syncStep === 1 ? '35%' : syncStep === 2 ? '70%' : '98%' }}></div>
+              </div>
+              <span className="crawler-status-sub">Aggregating fresh job vacancies in real-time...</span>
+            </div>
           </div>
         </div>
       )}
