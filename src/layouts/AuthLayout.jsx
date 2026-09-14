@@ -14,9 +14,10 @@ const AuthLayout = ({ children, leftPanelContent }) => {
         </div>
         <nav className="auth-nav">
           <Link to="/">Home</Link>
-          <a href="#">About</a>
-          <a href="#">Help</a>
-          <a href="#">Contact</a>
+          <Link to="/student/login">Student</Link>
+          <Link to="/institute/login">Institute</Link>
+          <Link to="/employer/login">Employer</Link>
+          <Link to="/institute/register">Register</Link>
         </nav>
       </header>
 

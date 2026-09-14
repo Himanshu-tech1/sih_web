@@ -70,21 +70,151 @@ const StudentLayout = () => {
             <input type="text" placeholder="Search courses, skills, job roles, companies..." />
           </div>
 
-          <div className="header-actions">
-            <button className="icon-btn">
+          <div className="header-actions" style={{ position: 'relative' }}>
+            <button 
+              className="icon-btn"
+              onClick={() => { setNotificationsOpen(!notificationsOpen); setProfileMenuOpen(false); setHelpOpen(false); }}
+            >
               <Bell size={20} />
               <span className="notification-badge">2</span>
             </button>
-            <button className="help-btn">
+
+            {/* Notifications Popover */}
+            {notificationsOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: '120px',
+                marginTop: '10px',
+                width: '320px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '12px',
+                zIndex: 100
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
+                  <strong style={{ fontSize: '13px', color: '#1e293b' }}>Student Alerts</strong>
+                  <span style={{ fontSize: '11px', color: '#2563eb', cursor: 'pointer' }}>Mark all read</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>Application Status: CNC Operator</div>
+                    <div style={{ color: '#64748b' }}>ABC Industries shortlisted your profile for plant interview.</div>
+                  </div>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>New Recommended Course</div>
+                    <div style={{ color: '#64748b' }}>PLC & Industrial Automation module available.</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <button 
+              className="help-btn"
+              onClick={() => { setHelpOpen(!helpOpen); setNotificationsOpen(false); setProfileMenuOpen(false); }}
+            >
               <span className="help-icon">?</span> Help
             </button>
-            <div className="user-profile">
+
+            {helpOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: '70px',
+                marginTop: '10px',
+                width: '280px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '14px',
+                zIndex: 100,
+                fontSize: '12px'
+              }}>
+                <strong style={{ display: 'block', fontSize: '13px', marginBottom: '6px', color: '#1e293b' }}>Student Career Helpline</strong>
+                <div style={{ background: '#f1f5f9', padding: '8px', borderRadius: '6px', marginBottom: '8px' }}>
+                  <div>📞 Student Support: <strong>1800-120-8040</strong></div>
+                  <div>✉️ Email: <strong>students.skillbridge@maha.gov.in</strong></div>
+                </div>
+                <button 
+                  className="primary-btn small full-width" 
+                  style={{ background: '#2563eb', color: 'white', border: 'none', padding: '6px', borderRadius: '6px', cursor: 'pointer' }}
+                  onClick={() => setHelpOpen(false)}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+
+            {/* Profile Dropdown */}
+            <div 
+              className="user-profile"
+              style={{ cursor: 'pointer', position: 'relative' }}
+              onClick={() => { setProfileMenuOpen(!profileMenuOpen); setNotificationsOpen(false); setHelpOpen(false); }}
+            >
               <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100" alt="Student" className="avatar-img" />
               <div className="user-info">
                 <span className="user-name">Priya Sharma</span>
-                <span className="user-role">Student</span>
+                <span className="user-role">Student Portal ▾</span>
               </div>
             </div>
+
+            {profileMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '10px',
+                width: '240px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '8px',
+                zIndex: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <div style={{ padding: '8px 10px', borderBottom: '1px solid #f1f5f9' }}>
+                  <div style={{ fontWeight: '700', fontSize: '13px', color: '#1e293b' }}>Priya Sharma</div>
+                  <div style={{ fontSize: '11px', color: '#64748b' }}>Fitter Trainee • Shree Ganesh ITI</div>
+                </div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  <Home size={15} color="#2563eb" /> Go to Home Page
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/student/dashboard/profile')}
+                >
+                  <User size={15} color="#16a34a" /> My Student Profile
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/institute/login')}
+                >
+                  <BookOpen size={15} color="#2563eb" /> Switch to Institute Portal
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/employer/login')}
+                >
+                  <Briefcase size={15} color="#ea580c" /> Switch to Employer Portal
+                </button>
+                <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '4px 0' }}></div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#dc2626', fontWeight: '600', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
           </div>
         </header>
 

@@ -9,6 +9,8 @@ import './InstituteLayout.css';
 const InstituteLayout = () => {
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   return (
     <div className="dashboard-layout">
@@ -71,18 +73,108 @@ const InstituteLayout = () => {
             <input type="text" placeholder="Search courses, skills, industries..." />
           </div>
 
-          <div className="header-actions">
-            <button className="icon-btn">
+          <div className="header-actions" style={{ position: 'relative' }}>
+            <button 
+              className="icon-btn"
+              onClick={() => { setNotificationsOpen(!notificationsOpen); setProfileMenuOpen(false); }}
+            >
               <Bell size={20} />
-              <span className="notification-badge">3</span>
+              <span className="notification-badge">2</span>
             </button>
-            <div className="user-profile">
-              <div className="avatar" style={{backgroundColor: '#2563eb', color: 'white'}}>SI</div>
+
+            {/* Notifications Popover */}
+            {notificationsOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: '120px',
+                marginTop: '10px',
+                width: '320px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '12px',
+                zIndex: 100
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
+                  <strong style={{ fontSize: '13px', color: '#1e293b' }}>Institute Notifications</strong>
+                  <span style={{ fontSize: '11px', color: '#2563eb', cursor: 'pointer' }}>Mark all read</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>New Job Posted by ABC Industries</div>
+                    <div style={{ color: '#64748b' }}>Urgent requirement for 50 CNC Machine Operators.</div>
+                  </div>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>Collaboration MoU Signed</div>
+                    <div style={{ color: '#64748b' }}>Tata Motors approved dual apprenticeship for 25 trainees.</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Profile Dropdown */}
+            <div 
+              className="user-profile"
+              style={{ cursor: 'pointer', position: 'relative' }}
+              onClick={() => { setProfileMenuOpen(!profileMenuOpen); setNotificationsOpen(false); }}
+            >
+              <div className="avatar" style={{ backgroundColor: '#2563eb', color: 'white' }}>SI</div>
               <div className="user-info">
                 <span className="user-name">Shree Ganesh ITI</span>
-                <span className="user-role">Training Institute</span>
+                <span className="user-role">Institute Portal ▾</span>
               </div>
             </div>
+
+            {profileMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '10px',
+                width: '240px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '8px',
+                zIndex: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <div style={{ padding: '8px 10px', borderBottom: '1px solid #f1f5f9' }}>
+                  <div style={{ fontWeight: '700', fontSize: '13px', color: '#1e293b' }}>Shree Ganesh ITI</div>
+                  <div style={{ fontSize: '11px', color: '#64748b' }}>Pune, Maharashtra</div>
+                </div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  <Home size={15} color="#2563eb" /> Go to Home Page
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/employer/dashboard')}
+                >
+                  <Building2 size={15} color="#16a34a" /> Switch to Employer Portal
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/student/dashboard')}
+                >
+                  <Users size={15} color="#9333ea" /> Switch to Student Portal
+                </button>
+                <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '4px 0' }}></div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#dc2626', fontWeight: '600', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
           </div>
         </header>
 

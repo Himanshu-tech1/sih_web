@@ -10,6 +10,9 @@ import './IndustryLayout.css';
 const IndustryLayout = () => {
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   const navItems = [
     { name: 'Company Profile', path: '/employer/dashboard', icon: Building2 },
@@ -96,22 +99,143 @@ const IndustryLayout = () => {
             <input type="text" placeholder="Search job roles, skills, institutes, or industry needs..." />
           </div>
 
-          <div className="header-actions">
-            <button className="icon-btn">
+          <div className="header-actions" style={{ position: 'relative' }}>
+            {/* Notification Button */}
+            <button 
+              className="icon-btn" 
+              onClick={() => { setNotificationsOpen(!notificationsOpen); setProfileMenuOpen(false); setHelpOpen(false); }}
+            >
               <Bell size={20} />
               <span className="notification-badge">3</span>
             </button>
-            <button className="icon-btn text-btn">
+
+            {/* Notifications Popover */}
+            {notificationsOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: '120px',
+                marginTop: '10px',
+                width: '320px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '12px',
+                zIndex: 100
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
+                  <strong style={{ fontSize: '13px', color: '#1e293b' }}>Recent Notifications</strong>
+                  <span style={{ fontSize: '11px', color: '#2563eb', cursor: 'pointer' }}>Mark all read</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>New Collaboration Request</div>
+                    <div style={{ color: '#64748b' }}>Government ITI Pune requested Apprenticeship partnership.</div>
+                  </div>
+                  <div style={{ padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>Job Applications</div>
+                    <div style={{ color: '#64748b' }}>12 student candidates applied for CNC Machine Operator.</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Help Button */}
+            <button 
+              className="icon-btn text-btn" 
+              onClick={() => { setHelpOpen(!helpOpen); setNotificationsOpen(false); setProfileMenuOpen(false); }}
+            >
               <HelpCircle size={20} />
               <span>Help</span>
             </button>
-            <div className="user-profile">
+
+            {helpOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: '70px',
+                marginTop: '10px',
+                width: '280px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '14px',
+                zIndex: 100,
+                fontSize: '12px'
+              }}>
+                <strong style={{ display: 'block', fontSize: '13px', marginBottom: '6px', color: '#1e293b' }}>Need Assistance?</strong>
+                <p style={{ margin: '0 0 8px 0', color: '#64748b' }}>Maharashtra Skill Development Employer Helpdesk:</p>
+                <div style={{ background: '#f1f5f9', padding: '8px', borderRadius: '6px', marginBottom: '8px' }}>
+                  <div>📞 Toll Free: <strong>1800-120-8040</strong></div>
+                  <div>✉️ Email: <strong>employer.support@maha.gov.in</strong></div>
+                </div>
+                <button className="primary-btn small full-width" onClick={() => setHelpOpen(false)}>Close</button>
+              </div>
+            )}
+
+            {/* User Profile Dropdown */}
+            <div 
+              className="user-profile" 
+              style={{ cursor: 'pointer', position: 'relative' }}
+              onClick={() => { setProfileMenuOpen(!profileMenuOpen); setNotificationsOpen(false); setHelpOpen(false); }}
+            >
               <div className="avatar">AC</div>
               <div className="user-info">
                 <span className="user-name">ABC Industries Pvt. Ltd.</span>
-                <span className="user-role">Industry Partner</span>
+                <span className="user-role">Employer Portal ▾</span>
               </div>
             </div>
+
+            {profileMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '10px',
+                width: '240px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+                padding: '8px',
+                zIndex: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <div style={{ padding: '8px 10px', borderBottom: '1px solid #f1f5f9' }}>
+                  <div style={{ fontWeight: '700', fontSize: '13px', color: '#1e293b' }}>ABC Industries</div>
+                  <div style={{ fontSize: '11px', color: '#64748b' }}>CIN: 27AABCT1234F1Z5</div>
+                </div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  <Home size={15} color="#2563eb" /> Go to Home Page
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/institute/dashboard')}
+                >
+                  <Building2 size={15} color="#16a34a" /> Switch to Institute Portal
+                </button>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#334155', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/student/dashboard')}
+                >
+                  <Users size={15} color="#9333ea" /> Switch to Student Portal
+                </button>
+                <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '4px 0' }}></div>
+                <button 
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: 'none', background: 'none', textAlign: 'left', fontSize: '13px', color: '#dc2626', fontWeight: '600', cursor: 'pointer', borderRadius: '6px' }}
+                  onClick={() => navigate('/')}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
           </div>
         </header>
 
