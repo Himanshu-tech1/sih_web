@@ -90,17 +90,6 @@ const InstituteCollaboration = () => {
     showToast(`🎉 Collaboration request sent to "${newRequest.industryName}"! Data forwarded to Industry Dashboard.`);
   };
 
-  const handlePartnerSelect = (partnerName, sector, type) => {
-    setForm(prev => ({
-      ...prev,
-      industryName: partnerName,
-      sector: sector,
-      type: type || 'Apprenticeship'
-    }));
-    document.querySelector('.request-form-card')?.scrollIntoView({ behavior: 'smooth' });
-    showToast(`Selected "${partnerName}". Complete the form and send request.`);
-  };
-
   const filteredList = collaborations.filter(collab => {
     const matchesSearch = !searchQuery || 
       collab.industryName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -465,90 +454,6 @@ const InstituteCollaboration = () => {
                 <Send size={16} /> Send Request to Industry
               </button>
             </form>
-          </div>
-
-          {/* Recommended Industry Partners */}
-          <div className="recommended-partners-card">
-            <div className="card-header border-bottom">
-              <div className="card-title">
-                <div className="icon-wrapper blue">✨</div>
-                <h3>Recommended Industry Partners</h3>
-              </div>
-            </div>
-            
-            <div className="partners-list">
-              <div className="partner-item">
-                <div className="company-logo tm">TM</div>
-                <div className="partner-info">
-                  <h4>Tata Motors Ltd.</h4>
-                  <p>Automobile | Chakan, Pune</p>
-                  <div className="partner-tags">
-                    <span className="tag blue">Apprenticeship</span>
-                    <span className="tag purple">Dual Training</span>
-                  </div>
-                </div>
-                <button 
-                  className="outline-btn small"
-                  onClick={() => handlePartnerSelect('Tata Motors Ltd.', 'Automobile', 'Apprenticeship')}
-                >
-                  Request
-                </button>
-              </div>
-
-              <div className="partner-item">
-                <div className="company-logo lt">LT</div>
-                <div className="partner-info">
-                  <h4>L&T Construction</h4>
-                  <p>Construction | Pune</p>
-                  <div className="partner-tags">
-                    <span className="tag cyan">Internship</span>
-                    <span className="tag yellow">Site Training</span>
-                  </div>
-                </div>
-                <button 
-                  className="outline-btn small"
-                  onClick={() => handlePartnerSelect('L&T Construction', 'Construction', 'Internship')}
-                >
-                  Request
-                </button>
-              </div>
-
-              <div className="partner-item">
-                <div className="company-logo ba">BA</div>
-                <div className="partner-info">
-                  <h4>Bajaj Auto</h4>
-                  <p>Automobile | Chhatrapati Sambhajinagar</p>
-                  <div className="partner-tags">
-                    <span className="tag blue">Apprenticeship</span>
-                    <span className="tag red">Joint Training</span>
-                  </div>
-                </div>
-                <button 
-                  className="outline-btn small"
-                  onClick={() => handlePartnerSelect('Bajaj Auto', 'Automobile', 'Joint Training')}
-                >
-                  Request
-                </button>
-              </div>
-
-              <div className="partner-item">
-                <div className="company-logo bo">BI</div>
-                <div className="partner-info">
-                  <h4>Bosch India</h4>
-                  <p>Manufacturing | Nashik & Pune</p>
-                  <div className="partner-tags">
-                    <span className="tag cyan">Lab Support</span>
-                    <span className="tag green">Faculty Training</span>
-                  </div>
-                </div>
-                <button 
-                  className="outline-btn small"
-                  onClick={() => handlePartnerSelect('Bosch India', 'Manufacturing', 'Lab Support')}
-                >
-                  Request
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
