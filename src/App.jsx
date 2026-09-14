@@ -8,7 +8,6 @@ import StudentAuth from './pages/student/StudentAuth';
 import StudentLayout from './layouts/StudentLayout';
 import StudentProfile from './pages/student/StudentProfile';
 import StudentAssessment from './pages/student/StudentAssessment';
-import StudentLearning from './pages/student/StudentLearning';
 import StudentJobs from './pages/student/StudentJobs';
 import StudentIndustryJobs from './pages/student/StudentIndustryJobs';
 
@@ -68,7 +67,6 @@ function App() {
         {/* Student Dashboard Routes */}
         <Route path="/student/dashboard" element={<StudentLayout />}>
           <Route index element={<StudentAssessment />} />
-          <Route path="learning" element={<StudentLearning />} />
           <Route path="jobs" element={<StudentJobs />} />
           <Route path="industry-jobs" element={<StudentIndustryJobs />} />
           <Route path="profile" element={<StudentProfile />} />

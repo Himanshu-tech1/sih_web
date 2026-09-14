@@ -9,6 +9,9 @@ import './StudentLayout.css';
 const StudentLayout = () => {
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   return (
     <div className="dashboard-layout">
@@ -23,9 +26,6 @@ const StudentLayout = () => {
         <nav className="sidebar-nav">
           <NavLink to="/student/dashboard" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <ClipboardList size={18} /> Skill Assessment
-          </NavLink>
-          <NavLink to="/student/dashboard/learning" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
-            <BookOpen size={18} /> Learning Recommendations
           </NavLink>
           <NavLink to="/student/dashboard/jobs" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} onClick={() => window.innerWidth <= 1024 && setIsSidebarCollapsed(true)}>
             <Search size={18} /> Job and Internship Opportunity
